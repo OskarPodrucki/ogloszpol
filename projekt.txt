@@ -1,0 +1,14 @@
+KARZDA APLIKACJA MAM MIEĆ 3 POZIOMY UPRAWNIEŃ
+
+ADMIN - może przydzielać i edytować użytkowników oraz ich dodawać
+PRACOWNIK - wyższe uprawnienia niż zwykły user
+USER - zwykły user
+
+
+OgłoszPol - nazwa filmu
+PLATFORMA OGŁOSZENIOWA - COŚ W STYLU OLX
+DODAWANIE, USUWANIE I MODYFIKOWANIE OGŁOSZEŃ
+PRZEGLĄDANIE
+ZAREZEROWANIA PRZEDMIOTU Z OGŁOSZENIA
+
+CO TA APLIKACJA MA ROBIĆ I JAK MA DZIAŁAĆ
