@@ -1,8 +1,12 @@
 ogloszpo! - nazwa strony
 PLATFORMA OGŁOSZENIOWA
 
+# ogloszpo!
 
-APLIKACJA MAM MIEĆ 3 POZIOMY UPRAWNIEŃ
+ogloszpo! - nazwa strony
+PLATFORMA OGŁOSZENIOWA
+
+# APLIKACJA MAM MIEĆ 3 POZIOMY UPRAWNIEŃ
 
 Poziomy uprawnień:
 
@@ -19,39 +23,44 @@ Jest zwykłym użytkownikiem aplikacji.
 Może dodawać, usuwać i modyfikować własne ogłoszenia oraz przeglądać ogłoszenia innych użytkowników.
 Ma możliwość rezerwacji przedmiotów z ogłoszeń.
 
-
-
-CO TA APLIKACJA MA ROBIĆ I JAK MA DZIAŁAĆ
+# CO TA APLIKACJA MA ROBIĆ I JAK MA DZIAŁAĆ
 
 Sposób działania:
 
 Rejestracja i logowanie:
-Użytkownicy będą musieli się zarejestrować i zalogować, aby korzystać z aplikacji. 
+Użytkownicy będą musieli się zarejestrować i zalogować, aby korzystać z aplikacji.
 Podczas rejestracji będą musieli podać podstawowe dane, takie jak adres e-mail i hasło.
 
 Dodawanie ogłoszeń:
-Zalogowani użytkownicy będą mogli dodawać nowe ogłoszenia, podając odpowiednie informacje o produkcie, 
+Zalogowani użytkownicy będą mogli dodawać nowe ogłoszenia, podając odpowiednie informacje o produkcie,
 takie jak nazwa, opis, cena, kategoria itp.
 
 Przeglądanie i rezerwowanie:
-Użytkownicy będą mogli przeglądać dostępne ogłoszenia, 
-używając różnych filtrów i opcji wyszukiwania. 
+Użytkownicy będą mogli przeglądać dostępne ogłoszenia,
+używając różnych filtrów i opcji wyszukiwania.
 Gdy znajdą interesujący ich produkt, będą mieli możliwość zamówienia przedmiotu.
 
 Zarządzanie ogłoszeniami:
-Użytkownicy będą mogli zarządzać swoimi ogłoszeniami, 
+Użytkownicy będą mogli zarządzać swoimi ogłoszeniami,
 edytując je lub usuwając, jeśli już nie są aktualne.
 
 Zarządzanie użytkownikami:
 Opisane jest to wyżej
 
 Zabezpieczenia:
-Aplikacja powinna zapewnić odpowiednie zabezpieczenia, 
+Aplikacja powinna zapewnić odpowiednie zabezpieczenia,
 takie jak hashowanie hasła podczas rejestracji
 
+# UKŁAD STRONY
 
+Taki sam jak w repo na githubie w pliku ogloszpo!figma.png:
 
-UŻYTE TECHNOLOGIE:
+https://github.com/OskarPodrucki/ogloszpol
+
+# UŻYTE TECHNOLOGIE
 
 PHP
 MySQL
+
+HTML
+CSS
