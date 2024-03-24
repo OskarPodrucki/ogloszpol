@@ -1,0 +1,53 @@
+/* header */
+#header {
+	display: block;
+	height: 15vh;
+	background-color: #f3950d;
+}
+
+#logo {
+	margin-left: 95px;
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 22%;
+	float: left;
+	background-color: #d9d9d9;
+	border: 2px #c8c8c8 solid;
+}
+
+#logo:hover {
+	background-color: #c8c8c8;
+	cursor: pointer;
+}
+
+button {
+	width: 100%;
+	height: 100px;
+	background-color: #d9d9d9;
+	font-size: 150%;
+	border: none;
+}
+
+button:hover {
+	background-color: #c8c8c8;
+	cursor: pointer;
+}
+
+#auth,
+#newAnnouncement {
+	margin-right: 95px;
+	margin-top: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 20%;
+	float: right;
+	background-color: #d9d9d9;
+	border: 2px #c8c8c8 solid;
+}
+
+#auth {
+	margin-right: 50px;
+}

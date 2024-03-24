@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+$_SESSION['zalogowano'] = false;
+$_SESSION['login'] = "odwiedzacz";
+$_SESSION['upr'] = "odwiedzajacy";
+
+?>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -10,34 +18,18 @@
 
 <body>
 
-
-    <div id="header">
-
-        <div id="logo">
-            <img id="logo" src="../img/pagelook/ogloszpo!.png" alt="logo">
-        </div>
-
-
-        <div id="newAnnouncement">
-            <button>Nowe ogłoszenie</button>
-        </div>
-
-        <div id="auth">
-            <button>Twoje konto</button>
-        </div>
-
-
-    </div>
-
+    <?php
+    include "components/header.php";
+    ?>
 
     <div id="content">
 
 
         <div id="search">
             <form action="index.php" method="POST">
-                <input type="text" class="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
-                <input type="text" class="searchInp" name="searchLocation" placeholder="lokalizacja...">
-                <select name="kategoria" class="searchInp">
+                <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
+                <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
+                <select id="searchCat" name="searchCategory">
                     <option value="none">Wybierz kategorię</option>
                     <option value="1">Motoryzacja</option>
                     <option value="2">Komputery</option>
@@ -51,11 +43,11 @@
         <div id="categories">
 
             <div class="category">
-                <div class="categoryImg">
-                    tutaj będzie obrazek
+                <div>
+                    <img class="categoryImg" src="../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
                 </div>
-                <div class="categoryName">
-                    tutaj będzie nazwa kategorii
+                <div>
+                    <h4 class="categoryTitle">tutaj będzie nazwa kategorii</h4>
                 </div>
             </div>
 

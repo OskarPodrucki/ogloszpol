@@ -8,6 +8,9 @@
 </head>
 
 <body>
+
+    <h1>REJESTRACJA</h1>
+
     <form action="register.php" method="POST">
         <input type="text" name="firstname" placeholder="firstname">
         <input type="text" name="lastname" placeholder="lastname">

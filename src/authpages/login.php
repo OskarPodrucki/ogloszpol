@@ -9,19 +9,21 @@
 
 <body>
 
+    <h1>LOGOWANIE</h1>
+
     <form action="login.php" method="POST">
 
-        <input type="text" name='loginF' placeholder="LOGIN">
-        <input type="password" name='password' placeholder="HASŁO">
+        <input type="text" name='login' placeholder="login">
+        <input type="password" name='password' placeholder="haslo">
         <input type="submit" placeholder="ZAREJESTRUJ SIĘ">
 
     </form>
 
 
     <?php
-    if (isset($_POST['loginF']) && isset($_POST['password'])) {
+    if (isset($_POST['login']) && isset($_POST['password'])) {
 
-        $loginF = $_POST['loginF'];
+        $loginF = $_POST['login'];
         $password = $_POST['password'];
 
         function szyfrujHasło($password)
