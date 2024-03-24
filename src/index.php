@@ -13,7 +13,7 @@
 
     <div id="header">
 
-        <div id="logo">
+        <div id="centerLogo">
             <img id="logo" src="../img/pagelook/ogloszpo!.png" alt="logo">
         </div>
 
@@ -35,9 +35,9 @@
 
         <div id="search">
             <form action="index.php" method="POST">
-                <input type="text" class="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
-                <input type="text" class="searchInp" name="searchLocation" placeholder="lokalizacja...">
-                <select name="kategoria" class="searchInp">
+                <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
+                <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
+                <select id="searchCat" name="searchCategory">
                     <option value="none">Wybierz kategorię</option>
                     <option value="1">Motoryzacja</option>
                     <option value="2">Komputery</option>
