@@ -4,4 +4,4 @@ $_SESSION['zalogowano'] = false;
 $_SESSION['login'] = "";
 $_SESSION['upr'] = "";
 
-header("Location: ./index.php");
+header("Location: ../index.php");

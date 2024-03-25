@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ogloszpo! - login</title>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 
 <body>
 
-    <h1>LOGOWANIE</h1>
+    <div id="loginDiv">
+        <h1>LOGOWANIE</h1>
 
-    <form action="login.php" method="POST">
+        <form action="login.php" method="POST">
 
-        <input type="text" name='login' placeholder="login">
-        <input type="password" name='password' placeholder="haslo">
-        <input type="submit" placeholder="ZAREJESTRUJ SIĘ">
+            <input type="text" name='login' placeholder="login">
+            <input type="password" name='password' placeholder="haslo">
+            <input type="submit" placeholder="ZAREJESTRUJ SIĘ">
 
-    </form>
-
+        </form>
+    </div>
 
     <?php
     if (isset($_POST['login']) && isset($_POST['password'])) {

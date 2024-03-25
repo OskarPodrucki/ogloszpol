@@ -18,6 +18,7 @@ $_SESSION['upr'] = "odwiedzajacy";
 
 <body>
 
+
     <?php
     include "components/header.php";
     ?>
@@ -26,7 +27,7 @@ $_SESSION['upr'] = "odwiedzajacy";
 
 
         <div id="search">
-            <form action="index.php" method="POST">
+            <form action="search.php" method="POST">
                 <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
                 <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
                 <select id="searchCat" name="searchCategory">
@@ -47,7 +48,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                     <img class="categoryImg" src="../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
                 </div>
                 <div>
-                    <h4 class="categoryTitle">tutaj będzie nazwa kategorii</h4>
+                    <h4 class="categoryTitle">tutaj będą się wyświetlać kategorie</h4>
                 </div>
             </div>
 

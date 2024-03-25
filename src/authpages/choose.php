@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>choose
-    </title>
+    <title>choose</title>
+    <link rel="stylesheet" href="../css/choose.css">
 </head>
+
 <body>
-    <h1>What do u want to do?</h1>
-    <a href="login.php"><button>LOGIN</button></a>
-    <a href="register.php"><button>REGISTER</button></a>
+
+    <div id="chooseDiv">
+        <h1>CO CHCESZ ZROBIĆ?</h1>
+        <div id="chooseButtons">
+            <a href="login.php"><button class="chooseButton">ZALOGUJ SIĘ</button></a>
+            <a href="register.php"><button class="chooseButton">ZAREJESTRUJ SIĘ</button></a>
+        </div>
+
+        <ul>
+            <li><a href="../peoplepages/admin.php">strona admina</a></li>
+            <li><a href="../peoplepages/worker.php">strona pracownika</a></li>
+            <li><a href="../peoplepages/user.php">strona użytkownika</a></li>
+        </ul>
+    </div>
+
 </body>
+
 </html>
