@@ -22,7 +22,7 @@ session_start();
 
 
     <?php
-    include "../components/header.php";
+    include "../components/headerPeoplePages.php";
     ?>
 
     <div id="content">

@@ -11,6 +11,9 @@
 <body>
 
     <div id="registerDiv">
+
+        <a href="choose.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
+
         <h1>REJESTRACJA</h1>
 
         <form action="register.php" method="POST">

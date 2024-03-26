@@ -11,6 +11,9 @@
 <body>
 
     <div id="chooseDiv">
+
+        <a href="../index.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
+
         <h1>CO CHCESZ ZROBIĆ?</h1>
         <div id="chooseButtons">
             <a href="login.php"><button class="chooseButton">ZALOGUJ SIĘ</button></a>

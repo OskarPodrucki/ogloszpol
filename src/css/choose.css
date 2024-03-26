@@ -26,6 +26,13 @@ body {
 	flex-direction: column;
 }
 
+#returnImg {
+	margin-right: 475px;
+	position: relative;
+	width: 100px;
+	height: 100px;
+}
+
 #chooseButtons {
 	margin-top: -60px;
 	width: 599px;
@@ -48,5 +55,5 @@ body {
 }
 
 h1 {
-	margin-top: 275px;
+	margin-top: 150px;
 }

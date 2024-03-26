@@ -83,6 +83,7 @@ body {
 	height: 70%;
 	background-color: #d9d9d9;
 	border: 2px #c8c8c8 solid;
+	gap: 25px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -94,6 +95,7 @@ body {
 	height: 225px;
 	background-color: #f3950d;
 	border: 2px #c8c8c8 solid;
+	border-radius: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -105,11 +107,22 @@ body {
 	width: 165px;
 	height: 165px;
 	border: 2px #c8c8c8 solid;
+	border-radius: 100%;
 }
 
 .categoryTitle {
-	margin-top: 8px;
+	margin-top: 5px;
 	text-align: center;
+}
+
+.categorySubmit {
+	position: absolute;
+	width: 225px;
+	height: 225px;
+	border-radius: 100%;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 #link {

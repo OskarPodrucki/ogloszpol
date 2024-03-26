@@ -32,7 +32,11 @@ $_SESSION['upr'] = "odwiedzajacy";
                     <img class="categoryImg" src="../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
                 </div>
                 <div>
-                    <h4 class="categoryTitle">tutaj będą się wyświetlać ogłoszenia</h4>
+                    <h3 class="categoryTitle">tutaj będą się wyświetlać ogłoszenia</h3>
+                    <h3 class="categoryTitle">używanie czy nie</h3>
+                    <h3 class="categoryTitle">cena</h3>
+                    <h3 class="categoryTitle">lokalizacja</h3>
+                    <h3 class="categoryTitle">ikonka serca i czy lubisz czy nie pzdr</h3>
                 </div>
             </div>
 
