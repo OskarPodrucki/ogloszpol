@@ -28,7 +28,7 @@ body {
 }
 
 .searched {
-	width: 75%;
+	width: 100%;
 	height: 200px;
 	background-color: whitesmoke;
 	border: 2px #c8c8c8 solid;
@@ -53,4 +53,41 @@ body {
 #link {
 	width: 100%;
 	height: 100%;
+}
+
+#siema1 {
+	float: left;
+	margin-left: 10px;
+}
+
+#siema2 {
+	float: left;
+	margin-left: 650px;
+}
+
+#siema3 {
+	clear: both;
+	float: left;
+	margin-right: 0px;
+}
+
+#siema4 {
+	clear: both;
+	float: left;
+	margin-top: 65px;
+}
+
+#siema5 {
+	float: right;
+	margin-top: 68px;
+	margin-right: 0px;
+}
+
+.categorySubmit {
+	position: absolute;
+	width: 64%;
+	height: 200px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
 }

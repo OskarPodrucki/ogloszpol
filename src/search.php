@@ -27,18 +27,22 @@ $_SESSION['upr'] = "odwiedzajacy";
 
         <div id="search">
 
-            <div class="searched">
-                <div>
-                    <img class="categoryImg" src="../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
+            <form action="announcement.php" method="POST">
+                <input type='hidden' name='categoryId' value="1">
+                <input class='categorySubmit' type='submit' value=''>
+                <div class="searched">
+                    <div>
+                        <img class="categoryImg" src="../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
+                    </div>
+                    <div>
+                        <h3 class="categoryTitle" id="siema1">tutaj będą się wyświetlać ogłoszenia</h3>
+                        <h3 class="categoryTitle" id="siema2">cena</h3>
+                        <h3 class="categoryTitle" id="siema3">używanie czy nie</h3>
+                        <h3 class="categoryTitle" id="siema4">lokalizacja</h3>
+                        <h3 class="categoryTitle" id="siema5">ikonka serca i czy lubisz czy nie pzdr</h3>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="categoryTitle">tutaj będą się wyświetlać ogłoszenia</h3>
-                    <h3 class="categoryTitle">używanie czy nie</h3>
-                    <h3 class="categoryTitle">cena</h3>
-                    <h3 class="categoryTitle">lokalizacja</h3>
-                    <h3 class="categoryTitle">ikonka serca i czy lubisz czy nie pzdr</h3>
-                </div>
-            </div>
+            </form>
 
         </div>
 
