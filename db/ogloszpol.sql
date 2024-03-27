@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 20 Mar 2024, 09:28
--- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.2.0
+-- Generation Time: Mar 27, 2024 at 07:58 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `ogloszpol`
+-- Database: `ogloszpol`
 --
 
 -- --------------------------------------------------------
@@ -34,13 +34,24 @@ CREATE TABLE `kategorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `kategorie`
+-- Dumping data for table `kategorie`
 --
 
 INSERT INTO `kategorie` (`id`, `nazwa`, `opis`) VALUES
-(1, 'Motoryzacja', 'Ogłoszenia związane z pojazdami i motoryzacją.'),
-(2, 'Komputery', 'Ogłoszenia dotyczące części komputerowych czy elektronicznych'),
-(3, 'Praca', 'Oferty pracy i poszukiwanie zatrudnienia.');
+(4, 'rolnictwo', 'rolnictwo i te sprawy\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `logowania`
+--
+
+CREATE TABLE `logowania` (
+  `id` int(11) NOT NULL,
+  `kto` varchar(256) NOT NULL,
+  `kiedy` date NOT NULL,
+  `uprawnienia` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -62,13 +73,11 @@ CREATE TABLE `ogloszenia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `ogloszenia`
+-- Dumping data for table `ogloszenia`
 --
 
 INSERT INTO `ogloszenia` (`id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId`) VALUES
-(1, 'Laptop HP do sprzedania', 'Sprzedam laptop HP w dobrym stanie, z systemem Windows 10.', 2, '2500.00', '2024-03-20 07:22:01', 'Warszawa', 'http://example.com/laptop.jpg', '123-456-789', 2),
-(2, 'iPhone 12 256GB', 'Nowy iPhone 12, kolor czarny, 256GB pamięci.', 2, '4500.00', '2024-03-20 07:22:01', 'Kraków', 'http://example.com/iphone.jpg', '987-654-321', 2),
-(3, 'Mieszkanie 2-pokojowe do wynajęcia', 'Do wynajęcia mieszkanie o powierzchni 50m2, w centrum miasta.', 1, '2000.00', '2024-03-20 07:22:01', 'Gdańsk', NULL, '111-222-333', 3);
+(4, 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 1, 25000.00, '2024-03-27 18:51:07', 'warszawa', '1', '123 123 123', 1);
 
 -- --------------------------------------------------------
 
@@ -78,17 +87,18 @@ INSERT INTO `ogloszenia` (`id`, `tytul`, `opis`, `kategoria`, `cena`, `data_doda
 
 CREATE TABLE `uprawnienia` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(50) NOT NULL
+  `nazwa` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `uprawnienia`
+-- Dumping data for table `uprawnienia`
 --
 
 INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
-(1, 'Admin'),
-(2, 'Pracownik'),
-(3, 'Użytkownik');
+(1, 'admin'),
+(2, 'pracownik'),
+(3, 'uzytkownik'),
+(4, 'odwiedzajacy');
 
 -- --------------------------------------------------------
 
@@ -108,15 +118,33 @@ CREATE TABLE `uzytkownicy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `uzytkownicy`
+-- Dumping data for table `uzytkownicy`
 --
 
 INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `uprawnienia`, `imie`, `nazwisko`, `data_rejestracji`) VALUES
-(1, 'jan.kowalski', 'haslo123', 'jan.kowalski@example.com', 1, 'Jan', 'Kowalski', '2024-03-20 07:24:44'),
-(2, 'anna.nowak', 'password', 'anna.nowak@example.com', 3, 'Anna', 'Nowak', '2024-03-20 07:24:44'),
-(3, 'adam.nowak', 'secret', 'adam.nowak@example.com', 3, 'Adam', 'Nowak', '2024-03-20 07:24:44'),
-(4, 'ewa.wisniewska', 'qwerty', 'ewa.wisniewska@example.com', 2, 'Ewa', 'Wiśniewska', '2024-03-20 07:24:44'),
-(5, 'marek.kowalczyk', 'abc123', 'marek.kowalczyk@example.com', 3, 'Marek', 'Kowalczyk', '2024-03-20 07:24:44');
+(7, 'oski', '202cb962ac59075b964b07152d234b70', 'oskar.podrucki.PRO@live.zs1mm.edu.pl', 3, 'oskar', 'podrucki', '2024-03-27 18:55:56');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zdjecia_ogloszenia`
+--
+
+CREATE TABLE `zdjecia_ogloszenia` (
+  `id` int(11) NOT NULL,
+  `url` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zdjecia_uzytkownicy`
+--
+
+CREATE TABLE `zdjecia_uzytkownicy` (
+  `id` int(11) NOT NULL,
+  `url` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indeksy dla zrzutów tabel
@@ -129,6 +157,12 @@ ALTER TABLE `kategorie`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `logowania`
+--
+ALTER TABLE `logowania`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `ogloszenia`
 --
 ALTER TABLE `ogloszenia`
@@ -138,8 +172,7 @@ ALTER TABLE `ogloszenia`
 -- Indeksy dla tabeli `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nazwa` (`nazwa`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `uzytkownicy`
@@ -150,32 +183,50 @@ ALTER TABLE `uzytkownicy`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- Indeksy dla tabeli `zdjecia_ogloszenia`
+--
+ALTER TABLE `zdjecia_ogloszenia`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `kategorie`
+-- AUTO_INCREMENT for table `kategorie`
 --
 ALTER TABLE `kategorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `ogloszenia`
+-- AUTO_INCREMENT for table `logowania`
+--
+ALTER TABLE `logowania`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ogloszenia`
 --
 ALTER TABLE `ogloszenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `uprawnienia`
+-- AUTO_INCREMENT for table `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `uzytkownicy`
+-- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `zdjecia_ogloszenia`
+--
+ALTER TABLE `zdjecia_ogloszenia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

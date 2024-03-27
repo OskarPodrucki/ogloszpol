@@ -58,9 +58,9 @@
             $sql = "INSERT INTO `uzytkownicy`(`login`, `haslo`, `email`, `uprawnienia`, `imie`, `nazwisko`, `data_rejestracji`) VALUES ('$login','$hashedPassword','$email',3,'$imie','$nazwisko', NOW())";
 
             if (mysqli_query($conn, $sql)) {
-                echo "Dodano użytkownika";
+                echo "";
             } else {
-                echo "Błąd: " . mysqli_error($conn);
+                echo "";
             }
 
             mysqli_close($conn);
