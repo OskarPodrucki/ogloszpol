@@ -1,11 +1,13 @@
 <?php
 session_start();
 
+// Inicjacja zmiennych sesji
 $_SESSION['zalogowano'] = false;
 $_SESSION['login'] = "odwiedzacz";
 $_SESSION['upr'] = "odwiedzajacy";
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -18,39 +20,43 @@ $_SESSION['upr'] = "odwiedzajacy";
 
 <body>
 
-
     <?php
+    // Wczytanie nagłówka
     include "components/header.php";
     ?>
 
     <div id="content">
 
-
         <div id="search">
+            <!-- Formularz wyszukiwania -->
             <form action="search.php" method="POST">
                 <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
                 <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
                 <select id="searchCat" name="searchCategory">
                     <option value="none">Wybierz kategorię</option>
                     <?php
-
+                    // Połączenie z bazą danych
                     $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
 
+                    // Sprawdzenie czy połączenie zostało nawiązane poprawnie
                     if (!$conn) {
-                        die("błąd okok");
+                        die("Błąd podczas łączenia z bazą danych: " . mysqli_connect_error());
                     }
 
-
+                    // Zapytanie SQL dla kategorii
                     $sql = "SELECT `id`, `nazwa`, `opis` FROM `kategorie`";
 
+                    // Wykonanie zapytania
                     $results = mysqli_query($conn, $sql);
 
+                    // Wyświetlenie opcji kategorii
                     if (mysqli_num_rows($results) > 0) {
                         while ($row = mysqli_fetch_assoc($results)) {
                             echo "<option value=" . $row['id'] . ">" . $row['nazwa'] . "</option>";
                         }
                     }
 
+                    // Zamknięcie połączenia z bazą danych
                     mysqli_close($conn);
                     ?>
                 </select>
@@ -58,24 +64,26 @@ $_SESSION['upr'] = "odwiedzajacy";
             </form>
         </div>
 
-
         <div id="categories">
-
             <?php
-
+            // Połączenie z bazą danych
             $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
 
+            // Sprawdzenie czy połączenie zostało nawiązane poprawnie
             if (!$conn) {
-                die("błąd okok");
+                die("Błąd podczas łączenia z bazą danych: " . mysqli_connect_error());
             }
 
-
+            // Zapytanie SQL dla kategorii
             $sql = "SELECT `id`, `nazwa`, `opis` FROM `kategorie`";
 
+            // Wykonanie zapytania
             $results = mysqli_query($conn, $sql);
 
+            // Wyświetlenie kategorii
             if (mysqli_num_rows($results) > 0) {
                 while ($row = mysqli_fetch_assoc($results)) {
+                    // Formularz dla każdej kategorii
                     echo "<form action='search.php' method='POST'>";
                     echo "<input type='hidden' name='categoryId' value=" . $row['id'] . ">";
                     echo "<input class='categorySubmit' type='submit' value=''>";
@@ -87,15 +95,11 @@ $_SESSION['upr'] = "odwiedzajacy";
                 }
             }
 
+            // Zamknięcie połączenia z bazą danych
             mysqli_close($conn);
             ?>
-
         </div>
-
-
     </div>
-
-
 </body>
 
 </html>

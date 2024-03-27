@@ -27,20 +27,59 @@ $_SESSION['upr'] = "odwiedzajacy";
 
         <div id="createAnnouncement">
 
-            <div class="info">
-                <div>
-                    <img class="categoryImg" src="../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
-                </div>
-                <div>
-                    <h4 class="categoryTitle">tutaj bedzie możliwość dodawania nowych ogłoszeń</h4>
-                </div>
+            <a href="index.php"><img id="returnImg" src="../img/pagelook/return.png" alt="powrot"></a>
+
+            <div id="createAnnouncementContent">
+                <form action="newAnnouncement.php" method="POST">
+                    <div id="opis">
+                        <h1 class="createTitle">Dodaj opis</h1>
+                        <input type="text" name="title" placeholder="Nazwa ogłoszenia">
+                        <select name="kategoria">
+                            <option value="none0">Wybierz kategorie</option>
+                            <?php
+
+                            $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
+
+                            if (!$conn) {
+                                die("błąd okok");
+                            }
+
+
+                            $sql = "SELECT `id`, `nazwa`, `opis` FROM `kategorie`";
+
+                            $results = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($results) > 0) {
+                                while ($row = mysqli_fetch_assoc($results)) {
+                                    echo "<option value=" . $row['id'] . ">" . $row['nazwa'] . "</option>";
+                                }
+                            }
+
+                            mysqli_close($conn);
+                            ?>
+                        </select>
+                        <input type="text" name="opis" placeholder="Opis ogłoszenia">
+                    </div>
+                    <div id="zdjecia">
+                        <h1 class="createTitle">Dodaj zdjęcie</h1>
+                        <input type="file" id="custom-file-upload">
+                    </div>
+                    <div id="kontakt">
+                        <h1 class="createTitle">Dodaj dane kontaktowe</h1>
+                        <input type="text" placeholder="Lokalizacja">
+                        <input type="text" placeholder="Imie">
+                        <input type="text" placeholder="E-mail">
+                        <input type="text" placeholder="Numer telefonu">
+                    </div>
+                    <div id="zatwierdz">
+                        <input type="submit">
+                    </div>
+                </form>
             </div>
 
         </div>
 
-
     </div>
-
 
 </body>
 

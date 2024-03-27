@@ -1,4 +1,3 @@
-/* header */
 #header {
 	display: block;
 	height: 15vh;
@@ -7,11 +6,12 @@
 
 #logo {
 	margin-left: 95px;
-	margin-top: 10px;
+	margin-top: 6px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	width: 22%;
+	height: 88%;
 	float: left;
 	background-color: #d9d9d9;
 	border: 2px #c8c8c8 solid;
@@ -24,9 +24,9 @@
 
 button {
 	width: 100%;
-	height: 100px;
+	height: 100%;
 	background-color: #d9d9d9;
-	font-size: 150%;
+	font-size: 200%;
 	border: none;
 }
 
@@ -38,11 +38,12 @@ button:hover {
 #auth,
 #newAnnouncement {
 	margin-right: 95px;
-	margin-top: 25px;
+	margin-top: 14px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 20%;
+	height: 80%;
 	float: right;
 	background-color: #d9d9d9;
 	border: 2px #c8c8c8 solid;

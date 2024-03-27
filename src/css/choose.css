@@ -1,7 +1,8 @@
+/* Resetowanie domyślnych stylów */
 body {
 	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	background-image: linear-gradient(
 		#999999,
 		#f3950d,
@@ -15,6 +16,7 @@ body {
 	overflow: hidden;
 }
 
+/* Wybór div */
 #chooseDiv {
 	margin: auto;
 	width: 600px;
@@ -33,6 +35,7 @@ body {
 	height: 100px;
 }
 
+/* Przyciski wyboru */
 #chooseButtons {
 	margin-top: -60px;
 	width: 599px;
@@ -45,7 +48,7 @@ body {
 }
 
 .chooseButton {
-	margin-top: 0px;
+	margin-top: 0;
 	width: 250px;
 	height: 80px;
 	margin-top: 50px;

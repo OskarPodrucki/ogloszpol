@@ -27,6 +27,8 @@ $_SESSION['upr'] = "odwiedzajacy";
 
         <div id="search">
 
+            <a href="index.php"><img id="returnImg" src="../img/pagelook/return.png" alt="powrot"></a>
+
             <form action="announcement.php" method="POST">
                 <input type='hidden' name='categoryId' value="1">
                 <input class='categorySubmit' type='submit' value=''>
@@ -39,7 +41,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                         <h3 class="categoryTitle" id="siema2">cena</h3>
                         <h3 class="categoryTitle" id="siema3">używanie czy nie</h3>
                         <h3 class="categoryTitle" id="siema4">lokalizacja</h3>
-                        <h3 class="categoryTitle" id="siema5">ikonka serca i czy lubisz czy nie pzdr</h3>
+                        <h3 class="categoryTitle" id="siema5">ikonka serca, usunięcia i edycji</h3>
                     </div>
                 </div>
             </form>
