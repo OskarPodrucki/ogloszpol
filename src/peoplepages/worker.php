@@ -29,17 +29,7 @@ session_start();
 
         <div id="peoplepage">
 
-            <div class="info">
-                <div>
-                    <img class="categoryImg" src="../../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
-                </div>
-                <div>
-                    <h4 class="categoryTitle">tutaj będzie strona dla poszczególnych użytkowników</h4>
-                </div>
-            </div>
-
         </div>
-
 
     </div>
 
