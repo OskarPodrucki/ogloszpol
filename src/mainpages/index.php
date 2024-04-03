@@ -44,7 +44,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                     }
 
                     // Zapytanie SQL dla kategorii
-                    $sql = "SELECT `id`, `nazwa`, `opis` FROM `kategorie`";
+                    $sql = "SELECT `id`, `nazwa` FROM `kategorie`";
 
                     // Wykonanie zapytania
                     $results = mysqli_query($conn, $sql);
