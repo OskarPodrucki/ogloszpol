@@ -8,11 +8,11 @@
     </a>
 
     <div id="newAnnouncement">
-        <a id="link" href="../../src/mainpages/newAnnouncement.php"><button>Nowe ogłoszenie</button></a>
+        <a id="link" href="../../src/mainpages/newAnnouncement.php"><button id="headerButton">Nowe ogłoszenie</button></a>
     </div>
 
     <div id="auth">
-        <a id="link" href="../../src/authpages/choose.php"><button>Twoje konto</button></a>
+        <a id="link" href="../../src/authpages/choose.php"><button id="headerButton">Twoje konto</button></a>
     </div>
 
 
