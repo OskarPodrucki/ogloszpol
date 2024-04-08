@@ -80,54 +80,82 @@ $_SESSION['upr'] = "odwiedzajacy";
 
             //przeglądanie ogłoszeń
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (empty($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCat'])) {
 
-                    // Połączenie z bazą danych
-                    $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
+                // Połączenie z bazą danych
+                $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
 
-                    // Sprawdzenie czy połączenie zostało nawiązane poprawnie
-                    if (!$conn) {
-                        die("Błąd podczas łączenia z bazą danych: " . mysqli_connect_error());
-                    }
-
-                    // Zapytanie SQL dla kategorii
-                    $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia`";
-
-                    // Wykonanie zapytania
-                    $results = mysqli_query($conn, $sql);
-
-                    // Wyświetlenie opcji kategorii
-                    if (mysqli_num_rows($results) > 0) {
-                        while ($row = mysqli_fetch_assoc($results)) {
-                            echo "<form action='announcement.php' method='POST'>";
-                            echo "<input type='hidden' name='categoryId' value=$row[id]>";
-                            echo "<div class='searched'>";
-                            echo "<div>";
-                            echo "<img class='categoryImg' src='../../img/pagelook/addedcategory.jpg' alt='addedCategoryImg'>";
-                            echo "</div>";
-                            echo "<div class='info'>";
-                            echo "<h3 class='categoryTitle' id='siema1'>$row[tytul]</h3>";
-                            echo "<h3 class='categoryTitle' id='siema1'>$row[cena]</h3>";
-                            echo "<h3 class='categoryTitle' id='siema1'>uzywane czy nie</h3>";
-                            echo "<h3 class='categoryTitle' id='siema1'>$row[lokalizacja]</h3>";
-                            echo "<h3 class='categoryTitle' id='siema1'>$row[kontakt_telefoniczny]</h3>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</form>";
-                        }
-                    }
-
-                    // Zamknięcie połączenia z bazą danych
-                    mysqli_close($conn);
-                } else {
-                    echo "mysqli_error();";
+                // Sprawdzenie czy połączenie zostało nawiązane poprawnie
+                if (!$conn) {
+                    die("Błąd podczas łączenia z bazą danych: " . mysqli_connect_error());
                 }
+
+                switch (true) {
+                    case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCat']):
+                        // Zapytanie SQL dla wszystkich kryteriów
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` LIKE '%{$_POST['searchCat']}'%";
+                        break;
+                    case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && empty($_POST['searchCat']):
+                        // Zapytanie SQL dla tytułu i lokalizacji
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
+                        break;
+                    case isset($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCat']):
+                        // Zapytanie SQL dla tytułu
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%'";
+                        break;
+                    case empty($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCat']):
+                        // Zapytanie SQL dla lokalizacji i kategorii
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` LIKE '%{$_POST['searchCat']}%'";
+                        break;
+                    case empty($_POST['searchInput']) && isset($_POST['searchLocation']) && empty($_POST['searchCat']):
+                        // Zapytanie SQL dla lokalizacji
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
+                        break;
+                    case empty($_POST['searchInput']) && empty($_POST['searchLocation']) && isset($_POST['searchCat']):
+                        // Zapytanie SQL dla kategorii
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `kategoria` = {$_POST['searchCat']}";
+                        break;
+                    case empty($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCat']):
+                        // Zapytanie SQL dla wszystkich ogłoszeń (brak kryteriów)
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia`";
+                        break;
+                    default:
+                        echo "Błąd wyszukiwania";
+                        mysqli_close($conn);
+                        exit(); // Przerwij wykonanie w przypadku braku zapytania
+                }
+
+                // Wykonanie zapytania
+                $results = mysqli_query($conn, $sql);
+
+                // Wyświetlenie ogłoszeń
+                if (mysqli_num_rows($results) > 0) {
+                    while ($row = mysqli_fetch_assoc($results)) {
+                        echo "<form class='form' action='announcement.php' method='POST'>";
+                        echo "<input type='hidden' name='categoryId' value=$row[id]>";
+                        echo "<div class='searched'>";
+                        echo "<div>";
+                        echo "<img class='categoryImg' src='../../img/pagelook/addedcategory.jpg' alt='addedCategoryImg'>";
+                        echo "</div>";
+                        echo "<div class='info'>";
+                        echo "<h3 class='categoryTitle' id='siema1'>$row[tytul]</h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'>$row[cena]</h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'>uzywane czy nie</h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'>$row[lokalizacja]</h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'>$row[kontakt_telefoniczny]</h3>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</form>";
+                    }
+                }
+
+                // Zamknięcie połączenia z bazą danych
+                mysqli_close($conn);
             } else {
-                echo "<h1>Nie ma wyszukiwania</h1>";
+                echo "<h1>błąd wyszukiwania</h1>";
             }
             ?>
 
-            <form action="announcement.php" method="POST">
+            <form class="form" action="announcement.php" method="POST">
                 <input type='hidden' name='categoryId' value="1">
                 <input class='categorySubmit' type='submit' value=''>
                 <div class="searched">

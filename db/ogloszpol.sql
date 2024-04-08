@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 07:58 PM
+-- Generation Time: Apr 08, 2024 at 06:27 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `kategorie` (
 --
 
 INSERT INTO `kategorie` (`id`, `nazwa`, `opis`) VALUES
-(4, 'rolnictwo', 'rolnictwo i te sprawy\r\n');
+(4, 'rolnictwo', 'rolnictwo i te sprawy\r\n'),
+(5, 'motoryzacja', 'samochody pojazdy itd');
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,16 @@ CREATE TABLE `ogloszenia` (
 --
 
 INSERT INTO `ogloszenia` (`id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId`) VALUES
-(4, 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 1, 25000.00, '2024-03-27 18:51:07', 'warszawa', '1', '123 123 123', 1);
+(4, 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 4, 25000.00, '2024-03-27 18:51:07', 'warszawa', '1', '123 123 123', 1),
+(5, 'test', 'test', 4, 1234.00, '2024-04-03 17:13:13', 'niger', '4', '321 351 883', 10),
+(6, 'test2', 'test2 ', 4, 21312.00, '2024-04-03 17:15:37', 'test2', '3', '231 534 312', 10),
+(7, 'test34', 'Stary kombaj John Deere 630, przeznaczony głównie na części ale kto odważny może go naprawić', 4, 21321.00, '2024-04-03 17:20:57', 'warszawa', '3', '312 123 521', 10),
+(8, '', '', 0, 0.00, '2024-04-03 17:20:58', '', '', '', 10),
+(9, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
+(10, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
+(11, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
+(12, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
+(13, 'babajaga', 'tani niewolnicy na sprzedaz', 5, 213412.00, '2024-04-03 17:45:26', 'warszawa', '5', '312 412 523', 10);
 
 -- --------------------------------------------------------
 
@@ -196,7 +206,7 @@ ALTER TABLE `zdjecia_ogloszenia`
 -- AUTO_INCREMENT for table `kategorie`
 --
 ALTER TABLE `kategorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `logowania`
@@ -208,7 +218,7 @@ ALTER TABLE `logowania`
 -- AUTO_INCREMENT for table `ogloszenia`
 --
 ALTER TABLE `ogloszenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `uprawnienia`
