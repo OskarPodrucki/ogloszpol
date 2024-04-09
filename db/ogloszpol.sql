@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2024 at 06:27 PM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Czas generowania: 09 Kwi 2024, 14:46
+-- Wersja serwera: 10.4.27-MariaDB
+-- Wersja PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ogloszpol`
+-- Baza danych: `ogloszpol`
 --
 
 -- --------------------------------------------------------
@@ -34,12 +34,13 @@ CREATE TABLE `kategorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `kategorie`
+-- Zrzut danych tabeli `kategorie`
 --
 
 INSERT INTO `kategorie` (`id`, `nazwa`, `opis`) VALUES
 (4, 'rolnictwo', 'rolnictwo i te sprawy\r\n'),
-(5, 'motoryzacja', 'samochody pojazdy itd');
+(5, 'motoryzacja', 'motoryzacja'),
+(6, 'elektronika', 'elektronika');
 
 -- --------------------------------------------------------
 
@@ -62,32 +63,45 @@ CREATE TABLE `logowania` (
 
 CREATE TABLE `ogloszenia` (
   `id` int(11) NOT NULL,
+  `użytkownikId` int(11) DEFAULT NULL,
+  `zdjecie_url` varchar(255) DEFAULT NULL,
   `tytul` varchar(255) NOT NULL,
   `opis` text NOT NULL,
   `kategoria` int(11) NOT NULL,
   `cena` decimal(10,2) DEFAULT NULL,
-  `data_dodania` timestamp NOT NULL DEFAULT current_timestamp(),
   `lokalizacja` varchar(100) DEFAULT NULL,
-  `zdjecie_url` varchar(255) DEFAULT NULL,
   `kontakt_telefoniczny` varchar(20) DEFAULT NULL,
-  `użytkownikId` int(11) DEFAULT NULL
+  `data_dodania` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ogloszenia`
+-- Zrzut danych tabeli `ogloszenia`
 --
 
-INSERT INTO `ogloszenia` (`id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId`) VALUES
-(4, 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 4, 25000.00, '2024-03-27 18:51:07', 'warszawa', '1', '123 123 123', 1),
-(5, 'test', 'test', 4, 1234.00, '2024-04-03 17:13:13', 'niger', '4', '321 351 883', 10),
-(6, 'test2', 'test2 ', 4, 21312.00, '2024-04-03 17:15:37', 'test2', '3', '231 534 312', 10),
-(7, 'test34', 'Stary kombaj John Deere 630, przeznaczony głównie na części ale kto odważny może go naprawić', 4, 21321.00, '2024-04-03 17:20:57', 'warszawa', '3', '312 123 521', 10),
-(8, '', '', 0, 0.00, '2024-04-03 17:20:58', '', '', '', 10),
-(9, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
-(10, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
-(11, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
-(12, '', '', 0, 0.00, '2024-04-03 17:20:59', '', '', '', 10),
-(13, 'babajaga', 'tani niewolnicy na sprzedaz', 5, 213412.00, '2024-04-03 17:45:26', 'warszawa', '5', '312 412 523', 10);
+INSERT INTO `ogloszenia` (`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES
+(4, 1, '1', 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 1, '25000.00', 'warszawa', '123 123 123', '2024-03-27 18:51:07'),
+(5, 10, '2', 'test', 'test', 4, '12300.00', 'test', '312 213 321', '0000-00-00 00:00:00'),
+(6, 10, '2', 'test2', 'test2', 4, '12312.00', 'test2', '123 532 432', '2024-04-03 11:33:42'),
+(7, 10, '2', 'test2', 'test2', 4, '12312.00', 'test2', '123 532 432', '2024-04-03 11:34:08'),
+(8, 10, '2', 'test2', 'test2', 4, '12312.00', 'test2', '123 532 432', '2024-04-03 11:34:12'),
+(9, 10, '2', 'test2', 'test2', 4, '12312.00', 'test2', '123 532 432', '2024-04-03 11:34:15'),
+(10, 10, '2', 'test2', 'test2', 4, '12312.00', 'test2', '123 532 432', '2024-04-03 11:34:17'),
+(11, 10, '2', 'test2', 'test2', 4, '12312.00', 'test2', '123 532 432', '2024-04-03 11:34:22'),
+(12, 10, '1', 'niewolnicy', 'tani niewolnicy na sprzedaz', 4, '5.00', 'niger', '213742069', '2024-04-03 12:58:02'),
+(13, 10, '3', 'komputrak', 'superkomputraka', 6, '150.00', 'warszawa', '312 512 321', '2024-04-09 11:45:34'),
+(14, 10, '2', 'motor', 'motor', 5, '123.00', 'warszawa', '312 123 523', '2024-04-09 11:55:34');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `polubienia`
+--
+
+CREATE TABLE `polubienia` (
+  `id_polubienia` int(11) NOT NULL,
+  `id_uzytkownika` int(11) NOT NULL,
+  `kiedy_polubiono` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -101,7 +115,7 @@ CREATE TABLE `uprawnienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `uprawnienia`
+-- Zrzut danych tabeli `uprawnienia`
 --
 
 INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
@@ -118,21 +132,47 @@ INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
 
 CREATE TABLE `uzytkownicy` (
   `id` int(11) NOT NULL,
+  `uprawnienia` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `haslo` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `uprawnienia` int(11) NOT NULL,
   `imie` varchar(50) DEFAULT NULL,
   `nazwisko` varchar(50) DEFAULT NULL,
   `data_rejestracji` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `uzytkownicy`
+-- Zrzut danych tabeli `uzytkownicy`
 --
 
-INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `uprawnienia`, `imie`, `nazwisko`, `data_rejestracji`) VALUES
-(7, 'oski', '202cb962ac59075b964b07152d234b70', 'oskar.podrucki.PRO@live.zs1mm.edu.pl', 3, 'oskar', 'podrucki', '2024-03-27 18:55:56');
+INSERT INTO `uzytkownicy` (`id`, `uprawnienia`, `login`, `haslo`, `email`, `imie`, `nazwisko`, `data_rejestracji`) VALUES
+(7, 3, 'oski', '202cb962ac59075b964b07152d234b70', 'oskar.podrucki.PRO@live.zs1mm.edu.pl', 'oskar', 'podrucki', '2024-03-27 18:55:56'),
+(10, 3, 'marekm', '202cb962ac59075b964b07152d234b70', 'marek.m@gmail.com', 'marek', 'maczkowski', '2024-04-03 11:25:24'),
+(12, 3, 'ksiazeczarnuchow', 'd483a769fdda2be027d0efa73c93f1ba', 'nigersklep@gmail.com', 'niger', 'sklep', '2024-04-03 12:59:04');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zamówienia`
+--
+
+CREATE TABLE `zamówienia` (
+  `id_zamowienia` int(11) NOT NULL,
+  `id_sprzedawcy` int(11) NOT NULL,
+  `id_kupującego` int(11) NOT NULL,
+  `kiedy_zamowiono` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zdjecia_kategorie`
+--
+
+CREATE TABLE `zdjecia_kategorie` (
+  `id` int(11) NOT NULL,
+  `url` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -154,6 +194,19 @@ CREATE TABLE `zdjecia_ogloszenia` (
 CREATE TABLE `zdjecia_uzytkownicy` (
   `id` int(11) NOT NULL,
   `url` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zgloszenia`
+--
+
+CREATE TABLE `zgloszenia` (
+  `id_zgloszenia` int(11) NOT NULL,
+  `id_zgloszonego` int(11) NOT NULL,
+  `id_zglaszajacego` int(11) NOT NULL,
+  `kiedy_zgloszono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -193,47 +246,59 @@ ALTER TABLE `uzytkownicy`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indeksy dla tabeli `zdjecia_kategorie`
+--
+ALTER TABLE `zdjecia_kategorie`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `zdjecia_ogloszenia`
 --
 ALTER TABLE `zdjecia_ogloszenia`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
--- AUTO_INCREMENT for table `kategorie`
+-- AUTO_INCREMENT dla tabeli `kategorie`
 --
 ALTER TABLE `kategorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `logowania`
+-- AUTO_INCREMENT dla tabeli `logowania`
 --
 ALTER TABLE `logowania`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ogloszenia`
+-- AUTO_INCREMENT dla tabeli `ogloszenia`
 --
 ALTER TABLE `ogloszenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `uprawnienia`
+-- AUTO_INCREMENT dla tabeli `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `uzytkownicy`
+-- AUTO_INCREMENT dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `zdjecia_ogloszenia`
+-- AUTO_INCREMENT dla tabeli `zdjecia_kategorie`
+--
+ALTER TABLE `zdjecia_kategorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `zdjecia_ogloszenia`
 --
 ALTER TABLE `zdjecia_ogloszenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

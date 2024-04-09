@@ -78,11 +78,11 @@ $_SESSION['upr'] = "odwiedzajacy";
                                     const links = htmlDocument.querySelectorAll('a');
                                     const imageNames = Array.from(links)
                                         .map(link => link.getAttribute('href'))
-                                        .filter(href => /\.(jpeg|jpg|png|gif)$/i.test(href)); // Filter only image file names
+                                        .filter(href => /\.(jpeg|jpg|png|gif)$/i.test(href));
                                     return imageNames;
                                 }
 
-                                // Function to create image elements and append them to the gallery
+
                                 async function createGallery() {
                                     const imageNames = await fetchImageNames(imageDirectory);
                                     imageNames.forEach(imageName => {
@@ -93,11 +93,11 @@ $_SESSION['upr'] = "odwiedzajacy";
                                     });
                                 }
 
-                                // Call the createGallery function to populate the gallery
+
                                 createGallery();
                             </script>
                         </div>
-                        <input type="number" name="categoryImgNumber">
+                        link do filmu: https://www.youtube.com/watch?v=-UO-uGFphYA
                     </div>
                     <div id="kontakt">
                         <h1 class="createTitle">Dodaj dane kontaktowe</h1>
