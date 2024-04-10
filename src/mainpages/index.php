@@ -33,7 +33,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                 <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
                 <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
                 <select id="searchCat" name="searchCategory">
-                    <option value="none">Wybierz kategorię</option>
+                    <option value="">wybierz kategorie...</option>
                     <?php
                     // Połączenie z bazą danych
                     $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
@@ -75,7 +75,7 @@ $_SESSION['upr'] = "odwiedzajacy";
             }
 
             // Zapytanie SQL dla kategorii
-            $sql = "SELECT `id`, `nazwa`, `opis` FROM `kategorie`";
+            $sql = "SELECT kategorie.id, kategorie.nazwa, zdjecia_kategorie.url AS url FROM kategorie JOIN zdjecia_kategorie ON zdjecia_kategorie.id_kategorii = kategorie.id;";
 
             // Wykonanie zapytania
             $results = mysqli_query($conn, $sql);
@@ -88,7 +88,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                     echo "<input type='hidden' name='categoryId' value=" . $row['id'] . ">";
                     echo "<input class='categorySubmit' type='submit' value=''>";
                     echo "<div class='category'>";
-                    echo "<img class='categoryImg' src='../../img/pagelook/addedcategory.jpg' alt='addedCategoryImg'>";
+                    echo "<img class='categoryImg' src={$row['url']} alt='addedCategoryImg'>";
                     echo "<h4 class='categoryTitle'>" . $row['nazwa'] . "</h4>";
                     echo "</div>";
                     echo "</form>";

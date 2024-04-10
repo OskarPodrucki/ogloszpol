@@ -33,14 +33,13 @@ body {
 }
 
 .form {
-	width: 90%;
+	width: 1500px;
 	height: 200px;
-	cursor: pointer;
 }
 
 .searched {
-	width: 1500px;
-	height: 200px;
+	width: 100%;
+	height: 100%;
 	background-color: whitesmoke;
 	border: 2px solid #c8c8c8;
 	display: flex;
@@ -79,10 +78,11 @@ body {
 
 .categorySubmit {
 	position: absolute;
-	width: 78.5%;
-	height: 200px;
+	margin-top: 500px;
+	margin-left: 200px;
 	border: none;
 	background-color: transparent;
+	color: transparent;
 	cursor: pointer;
 }
 

@@ -14,6 +14,7 @@ $_SESSION['upr'] = "odwiedzajacy";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ogloszpo!</title>
     <link rel="stylesheet" href="../css/newAnnouncement.css">
+    <link rel="stylesheet" href="../css/newAnnouncementImg.css">
 </head>
 
 <body>
@@ -65,37 +66,81 @@ $_SESSION['upr'] = "odwiedzajacy";
                         <h1 class="createTitle">Wybierz zdjęcie</h1>
                         <div id="zdjeciaKategorii">
                             <script>
-                                const gallery = document.getElementById("zdjeciaKategorii")
+                                // Pobieranie elementu galerii
+                                const gallery = document.getElementById("zdjeciaKategorii");
 
+                                // Ścieżka do katalogu z obrazami
                                 const imageDirectory = '../../img/categoryimg';
 
-
+                                // Funkcja pobierająca nazwy obrazów z katalogu
                                 async function fetchImageNames(directory) {
-                                    const response = await fetch(directory);
-                                    const data = await response.text();
-                                    const parser = new DOMParser();
-                                    const htmlDocument = parser.parseFromString(data, 'text/html');
-                                    const links = htmlDocument.querySelectorAll('a');
-                                    const imageNames = Array.from(links)
-                                        .map(link => link.getAttribute('href'))
-                                        .filter(href => /\.(jpeg|jpg|png|gif)$/i.test(href));
-                                    return imageNames;
-                                }
+                                    try {
+                                        // Pobranie danych z katalogu
+                                        const response = await fetch(directory);
+                                        const data = await response.text();
 
+                                        // Parsowanie danych do postaci dokumentu HTML
+                                        const parser = new DOMParser();
+                                        const htmlDocument = parser.parseFromString(data, 'text/html');
+
+                                        // Wybieranie wszystkich linków w dokumencie
+                                        const links = htmlDocument.querySelectorAll('a');
+
+                                        // Filtracja nazw plików obrazów
+                                        const imageNames = Array.from(links)
+                                            .map(link => link.getAttribute('href'))
+                                            .filter(href => /\.(jpeg|jpg|png|gif)$/i.test(href));
+
+                                        return imageNames;
+                                    } catch (error) {
+                                        console.error('Wystąpił błąd podczas pobierania nazw obrazów:', error);
+                                        return [];
+                                    }
+                                }
 
                                 async function createGallery() {
-                                    const imageNames = await fetchImageNames(imageDirectory);
-                                    imageNames.forEach(imageName => {
-                                        const img = document.createElement('img');
-                                        img.className = "categoryImg"
-                                        img.src = `${imageDirectory}/${imageName}`;
-                                        gallery.appendChild(img);
-                                    });
+                                    try {
+                                        // Pobranie nazw obrazów
+                                        const imageNames = await fetchImageNames(imageDirectory);
+
+                                        // Tworzenie kontenerów dla obrazów
+                                        imageNames.forEach(imageName => {
+                                            const container = document.createElement('div');
+                                            container.className = "container";
+
+                                            // Pobieranie liczby z nazwy pliku
+                                            const number = imageName.match(/\d+/)[0];
+
+                                            // Tworzenie elementu checkbox
+                                            const radio = document.createElement('input');
+                                            radio.type = "radio";
+                                            radio.name = "categoryImgNumber"
+                                            radio.value = number;
+                                            radio.id = imageName.split('.')[0];
+                                            container.appendChild(radio);
+
+                                            // Tworzenie elementu label
+                                            const label = document.createElement('label');
+                                            label.htmlFor = imageName.split('.')[0];
+
+                                            // Tworzenie elementu img
+                                            const img = document.createElement('img');
+                                            img.src = `${imageDirectory}/${imageName}`; // Tutaj łączysz ścieżkę do katalogu z nazwą pliku
+                                            label.appendChild(img);
+
+                                            container.appendChild(label);
+                                            gallery.appendChild(container);
+                                        });
+                                    } catch (error) {
+                                        console.error('Wystąpił błąd podczas tworzenia galerii:', error);
+                                    }
                                 }
 
 
+                                // Wywołanie funkcji obrazki
                                 createGallery();
                             </script>
+
                         </div>
                         link do filmu: https://www.youtube.com/watch?v=-UO-uGFphYA
                     </div>
