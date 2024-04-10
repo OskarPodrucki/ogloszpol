@@ -33,7 +33,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                 <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
                 <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
                 <select id="searchCat" name="searchCategory">
-                    <option value="">wybierz kategorie...</option>
+                    <option>wybierz kategorie...</option>
                     <?php
                     // Połączenie z bazą danych
                     $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');

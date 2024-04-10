@@ -1,7 +1,8 @@
 1. przemienić zdjęcia kategorii tak aby było dobrze ✅
 2. zrobić wybór zdjęcia poprzez checkboxy ✅
 3. dokończyć strony admina, pracownika i użytkownikami
-4. naprawić wyszukiwarkę ✅
+4. naprawić wyszukiwarkę i ogarnąć stronę główną ✅
+5. Zrobić podgląd ogłoszenia
 5. zrobić wszystkie sesje
 6. naprawić CSS
 7. sprawdzić czy w bazie jest wszystko ok

@@ -90,9 +90,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                     die("Błąd podczas łączenia z bazą danych: " . mysqli_connect_error());
                 }
 
-                $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia`";
-
-                switch (true) {
+                switch (false) {
                     case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCategory']):
                         // Zapytanie SQL dla wszystkich kryteriów
                         $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
@@ -124,14 +122,14 @@ $_SESSION['upr'] = "odwiedzajacy";
                     default:
                         echo "Błąd wyszukiwania";
                         mysqli_close($conn);
-                        exit(); // Przerwij wykonanie w przypadku braku zapytania
                 }
 
                 // Wykonanie zapytania
                 $results = mysqli_query($conn, $sql);
+                echo "<h1>Wyszukane ogłoszenia: " . mysqli_num_rows($results) . "</h1>";
 
                 // Wyświetlenie ogłoszeń
-                if (mysqli_num_rows($results) >= 0) {
+                if (mysqli_num_rows($results) > 0) {
                     while ($row = mysqli_fetch_assoc($results)) {
                         echo "<form class='form' action='announcement.php' method='POST'>";
                         echo "<input type='hidden' name='categoryId' value={$row['id']}>";
