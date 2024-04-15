@@ -2,6 +2,8 @@
 session_start();
 
 // Inicjacja zmiennych sesji
+$_SESSION['wyszukano'] = "nie";
+
 $_SESSION['zalogowano'] = false;
 $_SESSION['login'] = "odwiedzacz";
 $_SESSION['upr'] = "odwiedzajacy";
@@ -30,6 +32,7 @@ $_SESSION['upr'] = "odwiedzajacy";
         <div id="search">
             <!-- Formularz wyszukiwania -->
             <form action="search.php" method="POST">
+                <input type='hidden' name='czywyszukano' value='tak'>
                 <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
                 <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
                 <select id="searchCat" name="searchCategory">
@@ -86,6 +89,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                     // Formularz dla każdej kategorii
                     echo "<form action='search.php' method='POST'>";
                     echo "<input type='hidden' name='categoryId' value=" . $row['id'] . ">";
+                    echo "<input type='hidden' name='czywyszukano' value='tak'>";
                     echo "<input class='categorySubmit' type='submit' value=''>";
                     echo "<div class='category'>";
                     echo "<img class='categoryImg' src={$row['url']} alt='addedCategoryImg'>";

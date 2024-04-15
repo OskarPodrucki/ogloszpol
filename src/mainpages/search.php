@@ -1,9 +1,12 @@
 <?php
 session_start();
 
-$_SESSION['zalogowano'] = false;
-$_SESSION['login'] = "odwiedzacz";
-$_SESSION['upr'] = "odwiedzajacy";
+$_SESSION['wyszukano'] = $_POST['czywyszukano'];
+
+if ($_SESSION['wyszukano'] != "tak") {
+    sleep(2);
+    header("Location: ./index.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +48,7 @@ $_SESSION['upr'] = "odwiedzajacy";
                 }
 
                 // Zapytanie SQL dla kategorii
-                $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE kategoria = $kategoria";
+                $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE kategoria = $kategoria";
 
                 // Wykonanie zapytania
                 $results = mysqli_query($conn, $sql);
@@ -54,18 +57,18 @@ $_SESSION['upr'] = "odwiedzajacy";
                 if (mysqli_num_rows($results) > 0) {
                     while ($row = mysqli_fetch_assoc($results)) {
                         echo "<form class='form' action='announcement.php' method='POST'>";
-                        echo "<input type='hidden' name='categoryId' value=$row[id]>";
+                        echo "<input type='hidden' name='announcementID' value=$row[id]>";
                         echo "<div class='searched'>";
                         echo "<div>";
-                        echo "<img class='categoryImg' src='../../img/pagelook/addedcategory.jpg' alt='addedCategoryImg'>";
+                        echo "<img class='categoryImg' src='../../img/categoryimg/category$row[zdjecie_url].png' alt='addedCategoryImg'>";
                         echo "</div>";
                         echo "<div class='info'>";
                         echo "<input category='categorySubmit' type='submit' value='Podgląd'>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[tytul]</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[cena]</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>uzywane czy nie</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[lokalizacja]</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[kontakt_telefoniczny]</h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | $row[tytul] | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | CENA: $row[cena] zł | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | UŻYWANE: $row[uzywane] | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | LOKALIZACJA: $row[lokalizacja] | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | TELEFON: $row[kontakt_telefoniczny] | </h3>";
                         echo "</div>";
                         echo "</div>";
                         echo "</form>";
@@ -93,31 +96,31 @@ $_SESSION['upr'] = "odwiedzajacy";
                 switch (false) {
                     case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCategory']):
                         // Zapytanie SQL dla wszystkich kryteriów
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
                         break;
                     case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && empty($_POST['searchCategory']):
                         // Zapytanie SQL dla tytułu i lokalizacji
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
                         break;
                     case isset($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCategory']):
                         // Zapytanie SQL dla tytułu
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%'";
                         break;
                     case empty($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCategory']):
                         // Zapytanie SQL dla lokalizacji i kategorii
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
                         break;
                     case empty($_POST['searchInput']) && isset($_POST['searchLocation']) && empty($_POST['searchCategory']):
                         // Zapytanie SQL dla lokalizacji
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
                         break;
                     case empty($_POST['searchInput']) && empty($_POST['searchLocation']) && isset($_POST['searchCategory']):
                         // Zapytanie SQL dla kategorii
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `kategoria` = '{$_POST['searchCategory']}'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `kategoria` = '{$_POST['searchCategory']}'";
                         break;
                     case empty($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCategory']):
                         // Zapytanie SQL dla wszystkich ogłoszeń (brak kryteriów)
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia`";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia`";
                         break;
                     default:
                         echo "Błąd wyszukiwania";
@@ -132,18 +135,18 @@ $_SESSION['upr'] = "odwiedzajacy";
                 if (mysqli_num_rows($results) > 0) {
                     while ($row = mysqli_fetch_assoc($results)) {
                         echo "<form class='form' action='announcement.php' method='POST'>";
-                        echo "<input type='hidden' name='categoryId' value={$row['id']}>";
+                        echo "<input type='hidden' name='announcementID' value=$row[id]>";
                         echo "<div class='searched'>";
                         echo "<div>";
-                        echo "<img class='categoryImg' src='../../img/pagelook/addedcategory.jpg' alt='addedCategoryImg'>";
+                        echo "<img class='categoryImg' src='../../img/categoryimg/category$row[zdjecie_url].png' alt='addedCategoryImg'>";
                         echo "</div>";
                         echo "<div class='info'>";
                         echo "<input category='categorySubmit' type='submit' value='Podgląd'>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[tytul]</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[cena]</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>uzywane czy nie</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[lokalizacja]</h3>";
-                        echo "<h3 class='categoryTitle' id='siema1'>$row[kontakt_telefoniczny]</h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | $row[tytul] | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | CENA: $row[cena] zł | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | UŻYWANE: $row[uzywane] | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | LOKALIZACJA: $row[lokalizacja] | </h3>";
+                        echo "<h3 class='categoryTitle' id='siema1'> | TELEFON: $row[kontakt_telefoniczny] | </h3>";
                         echo "</div>";
                         echo "</div>";
                         echo "</form>";
@@ -156,23 +159,6 @@ $_SESSION['upr'] = "odwiedzajacy";
                 echo "<h1>błąd wyszukiwania</h1>";
             }
             ?>
-
-            <form class="form" action="announcement.php" method="POST">
-                <input type='hidden' name='categoryId' value="1">
-                <input class='categorySubmit' type='submit' value='1'>
-                <div class="searched">
-                    <div>
-                        <img class="categoryImg" src="../../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
-                    </div>
-                    <div class="info">
-                        <h3 class="categoryTitle" id="siema1">tutaj będą się wyświetlać ogłoszenia</h3>
-                        <h3 class="categoryTitle" id="siema2">cena</h3>
-                        <h3 class="categoryTitle" id="siema3">używanie czy nie</h3>
-                        <h3 class="categoryTitle" id="siema4">lokalizacja</h3>
-                        <h3 class="categoryTitle" id="siema5">ikonka serca, usunięcia i edycji</h3>
-                    </div>
-                </div>
-            </form>
 
         </div>
 
