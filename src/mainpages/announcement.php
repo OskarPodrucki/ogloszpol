@@ -1,7 +1,13 @@
 <?php
 session_start();
 
-$_SESSION['wyszukano'] = $_POST['czywyszukano'];
+$_SESSION['wyszukano'];
+
+$_SESSION['categoryID'];
+
+$_SESSION['input'];
+$_SESSION['location'];
+$_SESSION['category'];
 
 if ($_SESSION['wyszukano'] != "tak") {
     sleep(2);
@@ -30,7 +36,9 @@ if ($_SESSION['wyszukano'] != "tak") {
 
         <div id="createAnnouncement">
 
+
             <a href="search.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
+
 
             <div id="announcement">
                 <?php
@@ -75,20 +83,6 @@ if ($_SESSION['wyszukano'] != "tak") {
                 mysqli_close($conn);
 
                 ?>
-                <!-- <div>
-                    <img id="announcementImg" src="../../img/pagelook/addedcategory.jpg" alt="addedCategoryImg">
-                </div>
-                <div>
-                    <h5 id="announcementWhenAdded">Kiedy dodano</h5>
-                    <h5 id="announcementPhone">Telefon: 000 000 000</h5>
-                    <h1 id="announcementTitle">Nazwa ogłoszenia</h1>
-                    <h3 id="announcementPrice">Cena ogłoszenia</h3>
-                    <h1 id="Description">Opis:</h1>
-                    <p id="announcementDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, quidem. Ducimus illo error obcaecati non libero ex quisquam cum modi. Itaque, qui perferendis non aut nesciunt culpa inventore quidem magni?</p>
-                    <div id="announcementButtons">
-                        <button class="announcementButton">POLUB</button> <button class="announcementButton">EDYTUJ</button> <button class="announcementButton">USUŃ</button>
-                    </div>
-                </div> -->
             </div>
 
         </div>

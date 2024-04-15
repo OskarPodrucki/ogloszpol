@@ -2,6 +2,12 @@
 session_start();
 
 // Inicjacja zmiennych sesji
+$_SESSION['categoryID'] = "0";
+
+$_SESSION['input'] = "";
+$_SESSION['location'] = "";
+$_SESSION['category'] = "";
+
 $_SESSION['wyszukano'] = "nie";
 
 $_SESSION['zalogowano'] = false;

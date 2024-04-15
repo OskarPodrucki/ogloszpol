@@ -1,7 +1,11 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 
-$_SESSION['wyszukano'] = $_POST['czywyszukano'];
+if (isset($_POST['czywyszukano'])) {
+    $_SESSION['wyszukano'] = $_POST['czywyszukano'];
+}
+
 
 if ($_SESSION['wyszukano'] != "tak") {
     sleep(2);
@@ -34,10 +38,18 @@ if ($_SESSION['wyszukano'] != "tak") {
 
             <?php
 
-            //przeglądanie ogłoszeń po wybranej kategorii
-            if (isset($_POST['categoryId'])) {
 
-                $kategoria = $_POST['categoryId'];
+            if (empty($_SESSION['categoryID'])) {
+                $_SESSION['categoryID'] = $_POST['categoryId'];
+            }
+
+            echo $_SESSION['categoryID'];
+
+            //przeglądanie ogłoszeń po wybranej kategorii
+
+            if (isset($_SESSION['categoryID'])) {
+
+                $kategoria = $_SESSION['categoryID'];
 
                 // Połączenie z bazą danych
                 $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
@@ -82,8 +94,32 @@ if ($_SESSION['wyszukano'] != "tak") {
                 echo "";
             }
 
+
+            // $_SESSION['input'] = "0";
+            // $_SESSION['location'] = "0";
+            // $_SESSION['category'] = "0";
+
+
+            if (empty($_SESSION['input'])) {
+                $_SESSION['input'] = $_POST['searchInput'];
+            }
+
+            echo $_SESSION['input'];
+
+            if (empty($_SESSION['location'])) {
+                $_SESSION['location'] = $_POST['searchLocation'];
+            }
+
+            echo $_SESSION['location'];
+
+            if (empty($_SESSION['category'])) {
+                $_SESSION['category'] = $_POST['searchCategory'];
+            }
+
+            echo $_SESSION['category'];
+
             //przeglądanie ogłoszeń
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_SESSION['input']) && isset($_SESSION['location']) && isset($_SESSION['category'])) {
 
                 // Połączenie z bazą danych
                 $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
@@ -94,31 +130,31 @@ if ($_SESSION['wyszukano'] != "tak") {
                 }
 
                 switch (false) {
-                    case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCategory']):
+                    case isset($_SESSION['input']) && isset($_SESSION['location']) && isset($_SESSION['category']):
                         // Zapytanie SQL dla wszystkich kryteriów
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_SESSION['input']}%' AND `lokalizacja` LIKE '%{$_SESSION['location']}%' AND `kategoria` = '{$_SESSION['category']}'";
                         break;
-                    case isset($_POST['searchInput']) && isset($_POST['searchLocation']) && empty($_POST['searchCategory']):
+                    case isset($_SESSION['input']) && isset($_SESSION['location']) && empty($_SESSION['category']):
                         // Zapytanie SQL dla tytułu i lokalizacji
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%' AND `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_SESSION['input']}%' AND `lokalizacja` LIKE '%{$_SESSION['location']}%'";
                         break;
-                    case isset($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCategory']):
+                    case isset($_SESSION['input']) && empty($_SESSION['location']) && empty($_SESSION['category']):
                         // Zapytanie SQL dla tytułu
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_POST['searchInput']}%'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `tytul` LIKE '%{$_SESSION['input']}%'";
                         break;
-                    case empty($_POST['searchInput']) && isset($_POST['searchLocation']) && isset($_POST['searchCategory']):
+                    case empty($_SESSION['input']) && isset($_SESSION['location']) && isset($_SESSION['category']):
                         // Zapytanie SQL dla lokalizacji i kategorii
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%' AND `kategoria` = '{$_POST['searchCategory']}'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_SESSION['location']}%' AND `kategoria` = '{$_SESSION['category']}'";
                         break;
-                    case empty($_POST['searchInput']) && isset($_POST['searchLocation']) && empty($_POST['searchCategory']):
+                    case empty($_SESSION['input']) && isset($_SESSION['location']) && empty($_SESSION['category']):
                         // Zapytanie SQL dla lokalizacji
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_POST['searchLocation']}%'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `lokalizacja` LIKE '%{$_SESSION['location']}%'";
                         break;
-                    case empty($_POST['searchInput']) && empty($_POST['searchLocation']) && isset($_POST['searchCategory']):
+                    case empty($_SESSION['input']) && empty($_SESSION['location']) && isset($_SESSION['category']):
                         // Zapytanie SQL dla kategorii
-                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `kategoria` = '{$_POST['searchCategory']}'";
+                        $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia` WHERE `kategoria` = '{$_SESSION['category']}'";
                         break;
-                    case empty($_POST['searchInput']) && empty($_POST['searchLocation']) && empty($_POST['searchCategory']):
+                    case empty($_SESSION['input']) && empty($_SESSION['location']) && empty($_SESSION['category']):
                         // Zapytanie SQL dla wszystkich ogłoszeń (brak kryteriów)
                         $sql = "SELECT `id`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `data_dodania`, `lokalizacja`, `zdjecie_url`, `kontakt_telefoniczny`, `użytkownikId` FROM `ogloszenia`";
                         break;

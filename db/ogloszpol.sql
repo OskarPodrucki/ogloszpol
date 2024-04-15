@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Kwi 2024, 15:32
--- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.2.0
+-- Generation Time: Apr 15, 2024 at 09:52 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `ogloszpol`
+-- Database: `ogloszpol`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `kategorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `kategorie`
+-- Dumping data for table `kategorie`
 --
 
 INSERT INTO `kategorie` (`id`, `nazwa`, `opis`) VALUES
@@ -83,28 +83,29 @@ CREATE TABLE `ogloszenia` (
   `opis` text NOT NULL,
   `kategoria` int(11) NOT NULL,
   `cena` decimal(10,2) DEFAULT NULL,
+  `uzywane` text NOT NULL,
   `lokalizacja` varchar(100) DEFAULT NULL,
   `kontakt_telefoniczny` varchar(20) DEFAULT NULL,
   `data_dodania` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `ogloszenia`
+-- Dumping data for table `ogloszenia`
 --
 
-INSERT INTO `ogloszenia` (`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES
-(4, 1, '1', 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 4, '25000.00', 'warszawa', '123 123 123', '2024-03-27 18:51:07'),
-(12, 10, '1', 'kombajn', 'fajny kombaj na sprzedarz', 4, '5.00', 'lublin', '213742069', '2024-04-03 12:58:02'),
-(13, 10, '3', 'komputrak', 'superkomputraka', 6, '150.00', 'warszawa', '312 512 321', '2024-04-09 11:45:34'),
-(14, 10, '2', 'motor', 'motor', 5, '123.00', 'warszawa', '312 123 523', '2024-04-09 11:55:34'),
-(15, 10, '12', 'laptopik', 'fajny laptop do roboty i do pogrania w słabsze giereczki', 6, '2500.00', 'mistów', '213 511 213', '2024-04-10 06:49:14'),
-(16, 10, '12', 'laptopik', 'fajny laptop do roboty i do pogrania w słabsze giereczki', 6, '2500.00', 'mistów', '213 511 213', '2024-04-10 06:51:11'),
-(17, 10, '12', 'opryskiwacz', 'bardzo fajny osprzęt działa i jest super', 4, '1234.00', 'anielinek', '521 351 531', '2024-04-10 06:52:24'),
-(18, 10, '1', 'rtx 4090', 'fajna karta graficzna', 6, '3500.00', 'warszawa', '123 534 523', '2024-04-10 06:53:14'),
-(19, 10, '11', 'gruz (Volkswagen golf)', 'fajny gruzik :D', 5, '3212.00', 'warszawa', '431 342 254', '2024-04-10 06:54:19'),
-(20, 10, '8', 'ursus c360', 'fajny ciągnik', 4, '2312.00', 'katowice', '235 523 123', '2024-04-10 06:55:45'),
-(21, 10, '8', 'ursus c360', 'fajny ciągnik', 4, '2312.00', 'katowice', '235 523 123', '2024-04-10 06:56:36'),
-(22, 10, '8', 'zegarek taki fany', 'zegareczek', 8, '123.00', 'katowice', ' 412 123 342', '2024-04-10 13:05:16');
+INSERT INTO `ogloszenia` (`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES
+(4, 1, '4', 'ciągnik john deere', 'bardzo dobry ciągnij john deere', 4, 25000.00, 'nie', 'warszawa', '123 123 123', '2024-03-27 18:51:07'),
+(12, 10, '4', 'kombajn', 'fajny kombaj na sprzedarz', 4, 5.00, 'tak', 'lublin', '213742069', '2024-04-03 12:58:02'),
+(13, 10, '6', 'komputrak', 'superkomputraka', 6, 150.00, 'nie', 'warszawa', '312 512 321', '2024-04-09 11:45:34'),
+(14, 10, '5', 'motor', 'motor', 5, 123.00, 'tak', 'warszawa', '312 123 523', '2024-04-09 11:55:34'),
+(15, 10, '12', 'laptopik', 'fajny laptop do roboty i do pogrania w słabsze giereczki', 6, 2500.00, 'nie', 'mistów', '213 511 213', '2024-04-10 06:49:14'),
+(16, 10, '12', 'laptopik', 'fajny laptop do roboty i do pogrania w słabsze giereczki', 6, 2500.00, 'tak', 'mistów', '213 511 213', '2024-04-10 06:51:11'),
+(17, 10, '12', 'opryskiwacz', 'bardzo fajny osprzęt działa i jest super', 4, 1234.00, 'tak', 'anielinek', '521 351 531', '2024-04-10 06:52:24'),
+(18, 10, '6', 'rtx 4090', 'fajna karta graficzna', 6, 3500.00, 'tak', 'warszawa', '123 534 523', '2024-04-10 06:53:14'),
+(19, 10, '11', 'gruz (Volkswagen golf)', 'fajny gruzik :D', 5, 3212.00, 'tak', 'warszawa', '431 342 254', '2024-04-10 06:54:19'),
+(20, 10, '8', 'ursus c360', 'fajny ciągnik', 4, 2312.00, 'tak', 'katowice', '235 523 123', '2024-04-10 06:55:45'),
+(21, 10, '8', 'ursus c360', 'fajny ciągnik', 4, 2312.00, 'tak', 'katowice', '235 523 123', '2024-04-10 06:56:36'),
+(22, 10, '8', 'zegarek taki fany', 'zegareczek', 8, 123.00, 'tak', 'katowice', ' 412 123 342', '2024-04-10 13:05:16');
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,7 @@ CREATE TABLE `polubienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `polubienia`
+-- Dumping data for table `polubienia`
 --
 
 INSERT INTO `polubienia` (`id_polubienia`, `id_ogloszenia`, `id_uzytkownika`, `kiedy_polubiono`) VALUES
@@ -138,7 +139,7 @@ CREATE TABLE `uprawnienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `uprawnienia`
+-- Dumping data for table `uprawnienia`
 --
 
 INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
@@ -165,7 +166,7 @@ CREATE TABLE `uzytkownicy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `uzytkownicy`
+-- Dumping data for table `uzytkownicy`
 --
 
 INSERT INTO `uzytkownicy` (`id`, `uprawnienia`, `login`, `haslo`, `email`, `imie`, `nazwisko`, `data_rejestracji`) VALUES
@@ -187,7 +188,7 @@ CREATE TABLE `zamówienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `zamówienia`
+-- Dumping data for table `zamówienia`
 --
 
 INSERT INTO `zamówienia` (`id_zamowienia`, `id_sprzedawcy`, `id_kupującego`, `kiedy_zamowiono`) VALUES
@@ -206,7 +207,7 @@ CREATE TABLE `zdjecia_kategorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `zdjecia_kategorie`
+-- Dumping data for table `zdjecia_kategorie`
 --
 
 INSERT INTO `zdjecia_kategorie` (`id`, `id_kategorii`, `url`) VALUES
@@ -252,7 +253,7 @@ CREATE TABLE `zdjecia_uzytkownicy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `zdjecia_uzytkownicy`
+-- Dumping data for table `zdjecia_uzytkownicy`
 --
 
 INSERT INTO `zdjecia_uzytkownicy` (`id`, `id_kategorii`, `url`) VALUES
@@ -421,47 +422,47 @@ ALTER TABLE `zdjecia_ogloszenia`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `kategorie`
+-- AUTO_INCREMENT for table `kategorie`
 --
 ALTER TABLE `kategorie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT dla tabeli `logowania`
+-- AUTO_INCREMENT for table `logowania`
 --
 ALTER TABLE `logowania`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT dla tabeli `ogloszenia`
+-- AUTO_INCREMENT for table `ogloszenia`
 --
 ALTER TABLE `ogloszenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT dla tabeli `uprawnienia`
+-- AUTO_INCREMENT for table `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `uzytkownicy`
+-- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT dla tabeli `zdjecia_kategorie`
+-- AUTO_INCREMENT for table `zdjecia_kategorie`
 --
 ALTER TABLE `zdjecia_kategorie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT dla tabeli `zdjecia_ogloszenia`
+-- AUTO_INCREMENT for table `zdjecia_ogloszenia`
 --
 ALTER TABLE `zdjecia_ogloszenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

@@ -20,7 +20,7 @@
 
             <input type="text" name='login' placeholder="login">
             <input type="password" name='password' placeholder="haslo">
-            <input type="submit" placeholder="ZAREJESTRUJ SIĘ">
+            <input type="submit" placeholder="ZALOGUJ SIĘ">
 
         </form>
     </div>
@@ -62,8 +62,8 @@
             $_SESSION['login'] = $row['login'];
             $_SESSION['upr'] = $row['upr'];
 
-            header("Location: ./index.php");
-            sleep(3);
+            header("Location: ../mainpages/index.php");
+            sleep(2);
         } else {
             echo "błąd w logowaniu";
 
