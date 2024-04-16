@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -60,7 +63,7 @@
 
             $_SESSION['zalogowano'] = true;
             $_SESSION['login'] = $row['login'];
-            $_SESSION['upr'] = $row['upr'];
+            $_SESSION['upr'] = $row['uprawnienia'];
 
             header("Location: ../mainpages/index.php");
             sleep(2);

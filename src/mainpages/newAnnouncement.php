@@ -1,10 +1,5 @@
 <?php
 session_start();
-
-$_SESSION['zalogowano'] = false;
-$_SESSION['login'] = "odwiedzacz";
-$_SESSION['upr'] = "odwiedzajacy";
-
 ?>
 <!DOCTYPE html>
 <html lang="pl">

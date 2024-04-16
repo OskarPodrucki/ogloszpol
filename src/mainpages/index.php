@@ -10,9 +10,9 @@ $_SESSION['category'] = "";
 
 $_SESSION['wyszukano'] = "nie";
 
-$_SESSION['zalogowano'] = false;
-$_SESSION['login'] = "odwiedzacz";
-$_SESSION['upr'] = "odwiedzajacy";
+// $_SESSION['zalogowano'] = false;
+// $_SESSION['login'] = "odwiedzacz";
+// $_SESSION['upr'] = "odwiedzajacy";
 
 ?>
 

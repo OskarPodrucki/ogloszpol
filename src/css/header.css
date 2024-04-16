@@ -36,13 +36,14 @@ button:hover {
 }
 
 #auth,
-#newAnnouncement {
-	margin-right: 95px;
+#newAnnouncement,
+#logout {
+	margin-right: 90px;
 	margin-top: 14px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 20%;
+	width: 15%;
 	height: 80%;
 	float: right;
 	background-color: #d9d9d9;
@@ -50,5 +51,5 @@ button:hover {
 }
 
 #auth {
-	margin-right: 50px;
+	margin-right: 10px;
 }

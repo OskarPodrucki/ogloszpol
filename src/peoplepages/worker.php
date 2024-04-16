@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-// if ($_SESSION['upr'] != 'uprawnienie') {
-//     header("Location: ../index.php");
-// } else {
-//     echo "";
-// }
+if ($_SESSION['upr'] != '2') {
+    header("Location: ../mainpages/index.php");
+    echo "NIE JESTEŚ PRACOWNIKIEM";
+    sleep(2);
+} else {
+    echo "";
+}
 
 ?>
 <!DOCTYPE html>
@@ -36,23 +38,26 @@ session_start();
 
                 <div id="info">
 
-                    <hr>
+                    <form action="editProfile">
+                        <hr>
 
-                    <h2>Imie: twoje imie</h2> <button>Edytuj</button>
+                        <h2>Imie: twoje imie</h2>
 
-                    <hr>
+                        <hr>
 
-                    <h2>Nazwisko: twoje nazwisko</h2> <button>Edytuj</button>
+                        <h2>Nazwisko: twoje nazwisko</h2>
 
-                    <hr>
+                        <hr>
 
-                    <h2>E-mail: twój e-mail</h2> <button>Edytuj</button>
+                        <h2>E-mail: twój e-mail</h2>
 
-                    <hr>
+                        <hr>
 
-                    <h2>Lokalizacja: twoja Lokalizacja</h2> <button>Edytuj</button>
+                        <h2>Lokalizacja: twoja Lokalizacja</h2>
 
-                    <hr>
+                        <hr>
+                        <input type="submit" value="EDYTUJ PROFIL">
+                    </form>
 
                 </div>
 
