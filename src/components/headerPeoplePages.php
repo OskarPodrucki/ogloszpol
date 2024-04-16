@@ -9,11 +9,11 @@
 
     <?php
 
-    echo $_SESSION['zalogowano'];
+    // echo $_SESSION['zalogowano'];
 
-    echo $_SESSION['login'];
+    // echo $_SESSION['login'];
 
-    echo $_SESSION['upr'];
+    // echo $_SESSION['upr'];
 
     ?>
 

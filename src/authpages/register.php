@@ -21,7 +21,7 @@
             <input type="text" name="lastname" placeholder="lastname">
             <input type="text" name="email" placeholder="email">
             <input type="text" name="login" placeholder="login">
-            <input type="text" name="password" placeholder="password">
+            <input type="password" name="password" placeholder="password">
             <input type="submit" value="ZAREJESTRUJ SIĘ">
         </form>
     </div>
@@ -58,7 +58,7 @@
             $sql = "INSERT INTO `uzytkownicy`(`login`, `haslo`, `email`, `uprawnienia`, `imie`, `nazwisko`, `data_rejestracji`) VALUES ('$login','$hashedPassword','$email',3,'$imie','$nazwisko', NOW())";
 
             if (mysqli_query($conn, $sql)) {
-                echo "";
+                header("Location: ./login.php");
             } else {
                 echo "";
             }

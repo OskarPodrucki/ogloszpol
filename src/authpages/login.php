@@ -61,7 +61,7 @@ session_start();
 
             echo "zalogowano";
 
-            $_SESSION['zalogowano'] = true;
+            $_SESSION['zalogowano'] = TRUE;
             $_SESSION['login'] = $row['login'];
             $_SESSION['upr'] = $row['uprawnienia'];
 
@@ -70,7 +70,7 @@ session_start();
         } else {
             echo "błąd w logowaniu";
 
-            $_SESSION['zalogowano'] = false;
+            $_SESSION['zalogowano'] = FALSE;
             $_SESSION['login'] = "";
             $_SESSION['upr'] = "";
         }
@@ -79,7 +79,7 @@ session_start();
     } else {
         echo "";
 
-        $_SESSION['zalogowano'] = false;
+        $_SESSION['zalogowano'] = FALSE;
         $_SESSION['login'] = "";
         $_SESSION['upr'] = "";
     }

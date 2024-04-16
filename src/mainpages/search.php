@@ -43,8 +43,6 @@ if ($_SESSION['wyszukano'] != "tak") {
                 $_SESSION['categoryID'] = $_POST['categoryId'];
             }
 
-            echo $_SESSION['categoryID'];
-
             //przeglądanie ogłoszeń po wybranej kategorii
 
             if (isset($_SESSION['categoryID'])) {
@@ -64,6 +62,7 @@ if ($_SESSION['wyszukano'] != "tak") {
 
                 // Wykonanie zapytania
                 $results = mysqli_query($conn, $sql);
+                echo "<h1>Wyszukane ogłoszenia: " . mysqli_num_rows($results) . "</h1>";
 
                 // Wyświetlenie opcji kategorii
                 if (mysqli_num_rows($results) > 0) {
@@ -94,29 +93,17 @@ if ($_SESSION['wyszukano'] != "tak") {
                 echo "";
             }
 
-
-            // $_SESSION['input'] = "0";
-            // $_SESSION['location'] = "0";
-            // $_SESSION['category'] = "0";
-
-
             if (empty($_SESSION['input'])) {
                 $_SESSION['input'] = $_POST['searchInput'];
             }
-
-            echo $_SESSION['input'];
 
             if (empty($_SESSION['location'])) {
                 $_SESSION['location'] = $_POST['searchLocation'];
             }
 
-            echo $_SESSION['location'];
-
             if (empty($_SESSION['category'])) {
                 $_SESSION['category'] = $_POST['searchCategory'];
             }
-
-            echo $_SESSION['category'];
 
             //przeglądanie ogłoszeń
             if (isset($_SESSION['input']) && isset($_SESSION['location']) && isset($_SESSION['category'])) {

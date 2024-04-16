@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+if ($_SESSION['zalogowano'] != true) {
+    header("Location: ../authpages/choose.php");
+    echo "NIE JESTEŚ ZALOGOWANY, NIEZALOGOWANI UŻYTKOWNICY NIE MOGĄ TWORZYĆ OGŁOSZEŃ";
+    sleep(2);
+} else {
+    echo "";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -39,7 +48,6 @@ session_start();
                             if (!$conn) {
                                 die("błąd okok");
                             }
-
 
                             $sql = "SELECT `id`, `nazwa`, `opis` FROM `kategorie`";
 
@@ -137,13 +145,12 @@ session_start();
                             </script>
 
                         </div>
-                        link do filmu: https://www.youtube.com/watch?v=-UO-uGFphYA
                     </div>
                     <div id="kontakt">
                         <h1 class="createTitle">Dodaj dane kontaktowe</h1>
                         <input type="text" name="location" placeholder="Lokalizacja">
                         <input type="text" name="mail" placeholder="E-mail">
-                        <input type="text" name="phoneNumber" placeholder="Numer telefonu w formacie:    000-000-000">
+                        <input type="text" name="phoneNumber" placeholder="Numer telefonu w formacie:   000-000-000" min=0 max=9>
                     </div>
                     <div id="zatwierdz">
                         <input type="submit">
@@ -162,13 +169,43 @@ session_start();
                         $mail = $_POST['mail'];
                         $phone = $_POST['phoneNumber'];
 
+                        function formatujNumer($phone)
+                        {
+                            // Rozbij numer na trzy części
+                            $czesci = str_split($phone, 3);
+
+                            // Dodaj brakujące zera do każdej części
+                            foreach ($czesci as &$czesc) {
+                                $czesc = str_pad($czesc, 3, '0', STR_PAD_LEFT);
+                            }
+
+                            // Połącz części i oddziel kreskami
+                            return implode(' ', $czesci);
+                        }
+                        $formatedNumber = formatujNumer($phone);
+
+
                         $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
 
                         if (!$conn) {
                             die("Błąd połączenia z bazą danych: " . mysqli_connect_error());
                         }
 
-                        $sql = "INSERT INTO `ogloszenia`(`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES (NULL,'10','$categoryImgNumber','$title','$description','$category','$price','$location','$phone',NOW())";
+
+                        $sqluserID = "SELECT `id` FROM `uzytkownicy` WHERE `login` = '$_SESSION[login]'";
+
+                        // Wykonanie zapytania
+                        $results = mysqli_query($conn, $sqluserID);
+
+                        // Wyświetlenie opcji kategorii
+                        if (mysqli_num_rows($results) > 0) {
+                            while ($row = mysqli_fetch_assoc($results)) {
+                                $userID = $row['id'];
+                            }
+                        }
+
+
+                        $sql = "INSERT INTO `ogloszenia`(`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES (NULL,'$userID','$categoryImgNumber','$title','$description','$category','$price','$location','$formatedNumber',NOW())";
 
                         if (mysqli_query($conn, $sql)) {
                             echo "Ogłoszenie zostało dodane pomyślnie.";

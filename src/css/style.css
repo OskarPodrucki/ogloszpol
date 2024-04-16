@@ -73,7 +73,7 @@ body {
 	height: 70%;
 	background-color: #d9d9d9;
 	border: 2px solid #c8c8c8;
-	gap: 25px;
+	gap: 10px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -81,8 +81,8 @@ body {
 }
 
 .category {
-	width: 225px;
-	height: 225px;
+	width: 250px;
+	height: 250px;
 	background-color: #f3950d;
 	border: 2px solid #c8c8c8;
 	border-radius: 100%;
@@ -93,16 +93,16 @@ body {
 }
 
 .categoryImg {
-	margin-top: 25px;
-	width: 165px;
-	height: 165px;
+	margin-top: 0px;
+	width: 175px;
+	height: 175px;
 	background-color: white;
 	border: 2px solid #c8c8c8;
 	border-radius: 100%;
 }
 
 .categoryTitle {
-	margin-top: 5px;
+	margin-bottom: 5px;
 	text-align: center;
 }
 

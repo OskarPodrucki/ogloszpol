@@ -42,7 +42,7 @@ $_SESSION['wyszukano'] = "nie";
                 <input type="text" id="searchInp" name="searchInput" placeholder="wyszukaj ogłoszenie...">
                 <input type="text" id="searchLoc" name="searchLocation" placeholder="lokalizacja...">
                 <select id="searchCat" name="searchCategory">
-                    <option>wybierz kategorie...</option>
+                    <option value=none>wybierz kategorie...</option>
                     <?php
                     // Połączenie z bazą danych
                     $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
