@@ -140,3 +140,14 @@ input[type="submit"]:hover {
 	width: 50px;
 	height: 50px;
 }
+
+#radio{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;;
+}
+
+input[type="radio"]{
+	margin-left: 10px;
+}

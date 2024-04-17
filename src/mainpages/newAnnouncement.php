@@ -64,6 +64,11 @@ if ($_SESSION['zalogowano'] != true) {
                         </select>
                         <input type="text" name="description" placeholder="Opis ogłoszenia">
                         <input type="number" name="price" placeholder="Cena ogłoszenia">
+                        <h3>Czy używane?</h3>
+                        <div id="radio">
+                            <input type="radio" name="used" value="tak">tak</input>
+                            <input type="radio" name="used" value="nie">nie</input>
+                        </div>
                     </div>
                     <div id="zdjecia">
                         <h1 class="createTitle">Wybierz zdjęcie</h1>
@@ -164,6 +169,7 @@ if ($_SESSION['zalogowano'] != true) {
                         $title = $_POST['title'];
                         $category = $_POST['category'];
                         $description = $_POST['description'];
+                        $used = $_POST['used'];
                         $categoryImgNumber = $_POST['categoryImgNumber'];
                         $location = $_POST['location'];
                         $mail = $_POST['mail'];
@@ -205,7 +211,7 @@ if ($_SESSION['zalogowano'] != true) {
                         }
 
 
-                        $sql = "INSERT INTO `ogloszenia`(`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES (NULL,'$userID','$categoryImgNumber','$title','$description','$category','$price','$location','$formatedNumber',NOW())";
+                        $sql = "INSERT INTO `ogloszenia`(`id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania`) VALUES (NULL,'$userID','$categoryImgNumber','$title','$description','$category','$price','$used','$location','$formatedNumber',NOW())";
 
                         if (mysqli_query($conn, $sql)) {
                             echo "Ogłoszenie zostało dodane pomyślnie.";

@@ -19,12 +19,6 @@
             <a href="login.php"><button class="chooseButton">ZALOGUJ SIĘ</button></a>
             <a href="register.php"><button class="chooseButton">ZAREJESTRUJ SIĘ</button></a>
         </div>
-
-        <ul>
-            <li><a href="../peoplepages/admin.php">strona admina</a></li>
-            <li><a href="../peoplepages/worker.php">strona pracownika</a></li>
-            <li><a href="../peoplepages/user.php">strona użytkownika</a></li>
-        </ul>
     </div>
 
 </body>

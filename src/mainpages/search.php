@@ -12,6 +12,9 @@ if ($_SESSION['wyszukano'] != "tak") {
     header("Location: ./index.php");
 }
 
+
+unset($_SESSION['announcementID']);
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">

@@ -4,6 +4,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
 }
 
 /* Zawartość */
@@ -40,9 +41,10 @@ body {
 
 .categoryImg {
 	margin-top: 25px;
-	width: 165px;
-	height: 165px;
+	width: 150px;
+	height: 150px;
 	border: 2px solid #c8c8c8;
+	clear: both;
 }
 
 .categoryTitle {
@@ -75,6 +77,7 @@ body {
 #info {
 	display: flex;
 	flex-direction: column;
+	float: left;
 }
 
 button {
@@ -111,3 +114,4 @@ hr {
 h2 {
 	text-align: center;
 }
+

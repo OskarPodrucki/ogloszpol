@@ -85,10 +85,10 @@ body {
 #announcementButtons {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: flex-start;
 	margin-top: -197px;
-	margin-left: 600px;
+	margin-left: 550px;
 	width: 1000px;
 	height: 200px;
 	gap: 10px;

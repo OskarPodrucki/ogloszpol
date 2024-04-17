@@ -22,19 +22,21 @@
             <input type="text" name="email" placeholder="email">
             <input type="text" name="login" placeholder="login">
             <input type="password" name="password" placeholder="password">
+            <input type="text" name="lokalizacja" placeholder="lokalizacja">
             <input type="submit" value="ZAREJESTRUJ SIĘ">
         </form>
     </div>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['firstname']) && isset($_POST['lastname'])) {
+        if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['lokalizacja'])) {
 
             $login = $_POST['login'];
             $password = $_POST['password'];
             $email = $_POST['email'];
             $imie = $_POST['firstname'];
             $nazwisko = $_POST['lastname'];
+            $lokalizacja = $_POST['lokalizacja'];
 
             // Funkcja do hashowania hasła
             function hashowanieHasla($password)
@@ -55,7 +57,7 @@
                 die("Błąd połączenia: " . mysqli_connect_error());
             }
 
-            $sql = "INSERT INTO `uzytkownicy`(`login`, `haslo`, `email`, `uprawnienia`, `imie`, `nazwisko`, `data_rejestracji`) VALUES ('$login','$hashedPassword','$email',3,'$imie','$nazwisko', NOW())";
+            $sql = "INSERT INTO `uzytkownicy`(`login`, `haslo`, `email`, `lokalizacja`, `uprawnienia`, `imie`, `nazwisko`, `data_rejestracji`) VALUES ('$login','$hashedPassword','$email','$lokalizacja',3,'$imie','$nazwisko', NOW())";
 
             if (mysqli_query($conn, $sql)) {
                 header("Location: ./login.php");

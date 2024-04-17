@@ -2,13 +2,11 @@
 session_start();
 
 $_SESSION['wyszukano'];
-
 $_SESSION['categoryID'];
 
 if (!isset($_SESSION['announcementID'])) {
     $_SESSION['announcementID'] = $_POST['announcementID'];
 }
-
 
 $_SESSION['input'];
 $_SESSION['location'];
@@ -64,8 +62,6 @@ if ($_SESSION['wyszukano'] != "tak") {
                 // Wykonanie zapytania
                 $results = mysqli_query($conn, $sql);
 
-
-
                 // Wyświetlenie opcji kategorii
                 if (mysqli_num_rows($results) > 0) {
                     while ($row = mysqli_fetch_assoc($results)) {
@@ -80,32 +76,72 @@ if ($_SESSION['wyszukano'] != "tak") {
                         echo "<h1 id='Description'>Opis:</h1>";
                         echo "<p id='announcementDescription'>$row[opis]</p>";
                         echo "<div id='announcementButtons'>";
-                        echo "<form action='announcement.php'>";
-                        echo "<input type='hidden' name='announcement' value=$announcementID>";
-                        echo "<input type='hidden' name='action' value=1>";
-                        echo "<input class='actionButton' type='submit' value='POLUB'>";
-                        echo "</form>";
-                        echo "<form action='announcement.php'>";
-                        echo "<input type='hidden' name='announcement' value=$announcementID>";
-                        echo "<input type='hidden' name='action' value=2>";
-                        echo "<input class='actionButton' type='submit' value='EDYTUJ'>";
-                        echo "</form>";
-                        echo "<form action='announcement.php'>";
-                        echo "<input type='hidden' name='announcement' value=$announcementID>";
-                        echo "<input type='hidden' name='action' value=3>";
-                        echo "<input class='actionButton' type='submit' value='USUŃ'>";
-                        echo "</form>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                }
+                        if (!isset($_SESSION['zalogowano']) || $_SESSION['zalogowano'] !== true) {
+                            echo "NIE JESTEŚ ZALOGOWANY, ZALOGUJ SIĘ ABY WYKONYWAĆ OPERACJE NA OGŁOSZENIU";
+                        } else {
+                            if ($_SESSION['upr'] == 3) {
+                                echo "<form action='announcement.php' method='post'>";
+                                echo "<input type='hidden' name='announcement' value='$announcementID'>";
+                                echo "<input type='hidden' name='action' value='1'>";
+                                echo "<input class='actionButton' type='submit' value='POLUB'>";
+                                echo "</form>";
+                            } elseif ($_SESSION['upr'] == 2 || $_SESSION['upr'] == 1) {
+                                echo "<form action='announcement.php' method='post'>";
+                                echo "<input type='hidden' name='announcement' value='$announcementID'>";
+                                echo "<input type='hidden' name='action' value='2'>";
+                                echo "<input class='actionButton' type='submit' value='EDYTUJ'>";
+                                echo "</form>";
+                                echo "<form action='announcement.php' method='post'>";
+                                echo "<input type='hidden' name='announcement' value='$announcementID'>";
+                                echo "<input type='hidden' name='action' value='3'>";
+                                echo "<input class='actionButton' type='submit' value='USUŃ'>";
+                                echo "</form>";
+                                if (isset($_POST['announcement']) && $_POST['action'] == 3 && ($_SESSION['upr'] == 2 || $_SESSION['upr'] == 1)) {
+                                    // Zapytanie SQL dla kategorii
+                                    $sql = "DELETE FROM `ogloszenia` WHERE `id` = $_SESSION[announcementID]";
 
-                if (isset($_POST['announcement']) && $_POST['action'] = 1){
-                    
-                }
+                                    // Wykonanie zapytania
+                                    if (mysqli_query($conn, $sql)) {
+                                        echo "OPERACJA WYKONANA POMYŚLNIE";
+                                        header("Location: ../mainpages/search.php");
+                                        sleep(2);
+                                    } else {
+                                        echo "Błąd: " . $sql . "<br>" . mysqli_error($conn);
+                                    }
+                                }
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    };
 
                     // Zamknięcie połączenia z bazą danych
                     mysqli_close($conn);
+                }
+
+                // if (isset($_POST['announcement']) && $_POST['action'] = 1) {
+                //     // Zapytanie SQL dla kategorii
+                //     $sql = "SELECT `id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania` FROM `ogloszenia` WHERE `id` = $announcementID";
+
+                //     // Wykonanie zapytania
+                //     $results = mysqli_query($conn, $sql);
+
+                //     // Zamknięcie połączenia z bazą danych
+                //     mysqli_close($conn);
+                // }
+
+                // if (isset($_POST['announcement']) && $_POST['action'] = 2 && $_POST['upr'] = 2 || $_POST['upr'] = 1) {
+                //     // Zapytanie SQL dla kategorii
+                //     $sql = "SELECT `id`, `użytkownikId`, `zdjecie_url`, `tytul`, `opis`, `kategoria`, `cena`, `uzywane`, `lokalizacja`, `kontakt_telefoniczny`, `data_dodania` FROM `ogloszenia` WHERE `id` = $announcementID";
+
+                //     // Wykonanie zapytania
+                //     $results = mysqli_query($conn, $sql);
+
+                //     // Zamknięcie połączenia z bazą danych
+                //     mysqli_close($conn);
+                // }
+
+                // 
 
                 ?>
             </div>

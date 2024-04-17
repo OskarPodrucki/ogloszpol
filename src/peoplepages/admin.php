@@ -38,26 +38,43 @@ if ($_SESSION['upr'] != '1') {
 
                 <div id="info">
 
-                    <form action="editProfile">
-                        <hr>
+                    <?php
 
-                        <h2>Imie: twoje imie</h2>
+                    // Połączenie z bazą danych
+                    $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
 
-                        <hr>
+                    // Sprawdzenie czy połączenie zostało nawiązane poprawnie
+                    if (!$conn) {
+                        die("Błąd podczas łączenia z bazą danych: " . mysqli_connect_error());
+                    }
 
-                        <h2>Nazwisko: twoje nazwisko</h2>
+                    // Zapytanie SQL dla kategorii
+                    $sql = "SELECT `id`, `uprawnienia`, `login`, `haslo`, `email`, `lokalizacja`, `imie`, `nazwisko`, `data_rejestracji` FROM `uzytkownicy` WHERE `login` = '$_SESSION[login]'";
 
-                        <hr>
+                    // Wykonanie zapytania
+                    $results = mysqli_query($conn, $sql);
 
-                        <h2>E-mail: twój e-mail</h2>
+                    // Wyświetlenie opcji kategorii
+                    if (mysqli_num_rows($results) > 0) {
+                        while ($row = mysqli_fetch_assoc($results)) {
+                            echo "<hr>";
+                            echo "<h2>Login: $row[login]</h2>";
+                            echo "<hr>";
+                            echo "<h2>Imie: $row[imie]</h2>";
+                            echo "<hr>";
+                            echo "<h2>Nazwisko: $row[nazwisko]</h2>";
+                            echo "<hr>";
+                            echo "<h2>E-mail: $row[email]</h2>";
+                            echo "<hr>";
+                            echo "<h2>Lokalizacja: $row[lokalizacja]</h2>";
+                            echo "<hr>";
+                        }
+                    }
 
-                        <hr>
+                    // Zamknięcie połączenia z bazą danych
+                    mysqli_close($conn);
 
-                        <h2>Lokalizacja: twoja Lokalizacja</h2>
-
-                        <hr>
-                        <input type="submit" value="EDYTUJ PROFIL">
-                    </form>
+                    ?>
 
                 </div>
 
