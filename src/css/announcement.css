@@ -81,20 +81,30 @@ body {
 	height: 100%;
 }
 
+/* Przyciski ogłoszenia */
 #announcementButtons {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
 	margin-top: -197px;
 	margin-left: 600px;
 	width: 1000px;
 	height: 200px;
+	gap: 10px;
 }
 
-/* Przyciski ogłoszenia */
-.announcementButton {
-	width: 29%;
+.actionButton {
+	width: 287px;
 	height: 100px;
 	background-color: #d9d9d9;
 	font-size: 150%;
 	border: none;
+}
+
+.actionButton:hover {
+	background-color: #c8c8c8;
+	cursor: pointer;
 }
 
 #returnImg {

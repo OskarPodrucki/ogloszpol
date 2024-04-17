@@ -1,9 +1,14 @@
-`<?php
+<?php
 session_start();
 
 $_SESSION['wyszukano'];
 
 $_SESSION['categoryID'];
+
+if (!isset($_SESSION['announcementID'])) {
+    $_SESSION['announcementID'] = $_POST['announcementID'];
+}
+
 
 $_SESSION['input'];
 $_SESSION['location'];
@@ -43,7 +48,7 @@ if ($_SESSION['wyszukano'] != "tak") {
             <div id="announcement">
                 <?php
 
-                $announcementID = $_POST['announcementID'];
+                $announcementID = $_SESSION['announcementID'];
 
                 // Połączenie z bazą danych
                 $conn = mysqli_connect('localhost', 'root', '', 'ogloszpol');
@@ -59,6 +64,8 @@ if ($_SESSION['wyszukano'] != "tak") {
                 // Wykonanie zapytania
                 $results = mysqli_query($conn, $sql);
 
+
+
                 // Wyświetlenie opcji kategorii
                 if (mysqli_num_rows($results) > 0) {
                     while ($row = mysqli_fetch_assoc($results)) {
@@ -73,14 +80,32 @@ if ($_SESSION['wyszukano'] != "tak") {
                         echo "<h1 id='Description'>Opis:</h1>";
                         echo "<p id='announcementDescription'>$row[opis]</p>";
                         echo "<div id='announcementButtons'>";
-                        echo "<button class='announcementButton'>POLUB</button> <button class='announcementButton'>EDYTUJ</button> <button class='announcementButton'>USUŃ</button>";
+                        echo "<form action='announcement.php'>";
+                        echo "<input type='hidden' name='announcement' value=$announcementID>";
+                        echo "<input type='hidden' name='action' value=1>";
+                        echo "<input class='actionButton' type='submit' value='POLUB'>";
+                        echo "</form>";
+                        echo "<form action='announcement.php'>";
+                        echo "<input type='hidden' name='announcement' value=$announcementID>";
+                        echo "<input type='hidden' name='action' value=2>";
+                        echo "<input class='actionButton' type='submit' value='EDYTUJ'>";
+                        echo "</form>";
+                        echo "<form action='announcement.php'>";
+                        echo "<input type='hidden' name='announcement' value=$announcementID>";
+                        echo "<input type='hidden' name='action' value=3>";
+                        echo "<input class='actionButton' type='submit' value='USUŃ'>";
+                        echo "</form>";
                         echo "</div>";
                         echo "</div>";
                     }
                 }
 
-                // Zamknięcie połączenia z bazą danych
-                mysqli_close($conn);
+                if (isset($_POST['announcement']) && $_POST['action'] = 1){
+                    
+                }
+
+                    // Zamknięcie połączenia z bazą danych
+                    mysqli_close($conn);
 
                 ?>
             </div>
