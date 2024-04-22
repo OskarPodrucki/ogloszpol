@@ -1,6 +1,0 @@
-1. poprawić css
-2. zrobić polubianie edytowanie i usuwanie ogloszeń
-3. naprawić wyszukiwanie przez inputy
-4. dodanie funkcji na stronie usera
-5. dodanie funkcji na stronie pracownika
-6. dodanie funkcji na stronie admina

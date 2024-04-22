@@ -35,9 +35,10 @@ unset($_SESSION['announcementID']);
 
     <div id="content">
 
+        <a href="index.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
+
         <div id="search">
 
-            <a href="index.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
 
             <?php
 

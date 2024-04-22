@@ -17,7 +17,7 @@ if ($_SESSION['zalogowano'] != true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ogloszpo!</title>
-    <link rel="stylesheet" href="../css/newAnnouncement.css">
+     <link rel="stylesheet" href="../css/newAnnouncement.css">
     <link rel="stylesheet" href="../css/newAnnouncementImg.css">
 </head>
 
@@ -30,9 +30,12 @@ if ($_SESSION['zalogowano'] != true) {
 
     <div id="content">
 
+    
+        <a href="index.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
+
+        
         <div id="createAnnouncement">
 
-            <a href="index.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
 
             <div id="createAnnouncementContent">
                 <form action="newAnnouncement.php" method="POST">

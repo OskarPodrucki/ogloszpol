@@ -14,7 +14,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 15px;
 }
 
 #createAnnouncement {
@@ -48,7 +47,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
-	overflow-y: scroll;;
+	overflow-y: scroll;
 }
 
 .categoryImg {
@@ -134,20 +133,20 @@ input[type="submit"]:hover {
 }
 
 #returnImg {
-	margin-left: -125px;
-	margin-top: -360px;
+	margin-left: -847px;
+	margin-top: 15px;
 	position: absolute;
 	width: 50px;
 	height: 50px;
 }
 
-#radio{
+#radio {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;;
+	align-items: center;
 }
 
-input[type="radio"]{
+input[type="radio"] {
 	margin-left: 10px;
 }

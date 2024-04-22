@@ -37,11 +37,9 @@ if ($_SESSION['wyszukano'] != "tak") {
 
     <div id="content">
 
+        <a href="search.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
+
         <div id="createAnnouncement">
-
-
-            <a href="search.php"><img id="returnImg" src="../../img/pagelook/return.png" alt="powrot"></a>
-
 
             <div id="announcement">
                 <?php

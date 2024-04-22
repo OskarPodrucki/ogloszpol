@@ -14,7 +14,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 15px;
 }
 
 /* Tworzenie ogłoszenia */
@@ -108,8 +107,8 @@ body {
 }
 
 #returnImg {
-	margin-left: -103px;
-	margin-top: -356px;
+	margin-left: -847px;
+	margin-top: 15px;
 	position: absolute;
 	width: 50px;
 	height: 50px;

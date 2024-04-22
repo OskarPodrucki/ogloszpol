@@ -99,8 +99,8 @@ $_SESSION['wyszukano'] = "nie";
                     echo "<input class='categorySubmit' type='submit' value=''>";
                     echo "<div class='category'>";
                     echo "<img class='categoryImg' src={$row['url']} alt='addedCategoryImg'>";
-                    echo "<h4 class='categoryTitle'>" . $row['nazwa'] . "</h4>";
                     echo "</div>";
+                    echo "<h4 class='categoryTitle'>" . $row['nazwa'] . "</h4>";
                     echo "</form>";
                 }
             }
